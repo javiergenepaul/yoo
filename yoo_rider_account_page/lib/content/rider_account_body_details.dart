@@ -28,8 +28,8 @@ class AccountBodyDetails extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        rating(),
-                        followers(),
+                        rating(context),
+                        followers(context),
                       ],
                     ),
                   ),
@@ -41,14 +41,16 @@ class AccountBodyDetails extends StatelessWidget {
             height: 10,
           ),
           Divider(),
-          SafeArea(
-            child: Column(
-              children: [
-                incomeSummary(context),
-                helpCentre(context),
-                notificationSettings(context),
-                privacyPolicy(context),
-              ],
+          SingleChildScrollView(
+            child: SafeArea(
+              child: Column(
+                children: [
+                  incomeSummary(context),
+                  helpCentre(context),
+                  notificationSettings(context),
+                  privacyPolicy(context),
+                ],
+              ),
             ),
           ),
         ],
