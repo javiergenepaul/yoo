@@ -8,10 +8,10 @@ class MonthlyIncomeSummary extends StatelessWidget {
         children: [
           Container(
             alignment: Alignment.centerLeft,
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(15),
             child: Text(
               'Monthly Report',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+              style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
             ),
           ),
           Container(

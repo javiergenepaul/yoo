@@ -11,10 +11,10 @@ class DailyIncomeSummary extends StatelessWidget {
           ),
           Container(
             alignment: Alignment.centerLeft,
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(15),
             child: Text(
               'Daily Report',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+              style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
             ),
           ),
           Container(

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:yoo_rider_account_page/screens/notification_settings_page.dart';
+import 'package:yoo_rider_account_page/widgets/notification_items_widgets.dart';
+import 'package:yoo_rider_account_page/widgets/notification_widgets.dart';
 
 class NotificationsPage extends StatelessWidget {
+  static const routeName = '/notifications';
   const NotificationsPage({Key? key}) : super(key: key);
 
   @override
@@ -9,9 +13,14 @@ class NotificationsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Notifications'),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(NotificationSettings.routeName);
+              },
+              icon: Icon(Icons.settings)),
         ],
       ),
+      body: NotificationWidget(),
     );
   }
 }
