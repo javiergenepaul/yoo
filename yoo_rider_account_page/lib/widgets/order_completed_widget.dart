@@ -7,7 +7,7 @@ class OrderCompletedWidget extends StatelessWidget {
     OrderModel(
         TransactionID: "1234-56789",
         Schedule: "07/07/21 ",
-        Time: "2:12PM",
+        Time: "2:12 PM",
         Pickup: "Pickup",
         DropOff: "Drop Off",
         Vehicle: "Motorcycle",
