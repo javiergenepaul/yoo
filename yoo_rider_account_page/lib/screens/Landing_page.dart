@@ -14,13 +14,13 @@ class LandingPage extends StatefulWidget {
 class _HomePageState extends State<LandingPage> {
   int _currentIndex = 0;
 
-  final AppBarTitle = [
-    Text("Home"),
-    Text("Order"),
-    Text("Wallet"),
-    Text("Notification"),
-    Text("Profile"),
-  ];
+  // final AppBarTitle = [
+  //   Text("Home"),
+  //   Text("My Order"),
+  //   Text("My Wallet"),
+  //   Text("Notification"),
+  //   Text("My Account"),
+  // ];
 
   List<Widget> _widgetOption = <Widget>[
     HomePage(),
@@ -33,9 +33,9 @@ class _HomePageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: AppBarTitle[_currentIndex],
-      ),
+      // appBar: AppBar(
+      //   title: AppBarTitle[_currentIndex],
+      // ),
       body: _widgetOption.elementAt(_currentIndex),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,

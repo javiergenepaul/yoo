@@ -9,6 +9,9 @@ class _WalletPageState extends State<WalletPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('My Wallet'),
+      ),
       body: Center(
         child: Text("Wallet Page"),
       ),

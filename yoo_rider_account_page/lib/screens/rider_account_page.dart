@@ -7,9 +7,9 @@ class RiderAccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('My Account'),
-      // ),
+      appBar: AppBar(
+        title: Text('My Account'),
+      ),
       body: AccountBodyDetails(),
     );
   }
