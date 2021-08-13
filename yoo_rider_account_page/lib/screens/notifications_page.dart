@@ -10,16 +10,16 @@ class NotificationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Notifications'),
-      //   actions: [
-      //     IconButton(
-      //         onPressed: () {
-      //           Navigator.of(context).pushNamed(NotificationSettings.routeName);
-      //         },
-      //         icon: Icon(Icons.settings)),
-      //   ],
-      // ),
+      appBar: AppBar(
+        title: Text('Notifications'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(NotificationSettings.routeName);
+              },
+              icon: Icon(Icons.settings)),
+        ],
+      ),
       body: NotificationWidget(),
     );
   }
