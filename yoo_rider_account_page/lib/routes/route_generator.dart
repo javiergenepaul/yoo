@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/screens/Landing_page.dart';
+import 'package:yoo_rider_account_page/screens/help_centre_page.dart';
 import 'package:yoo_rider_account_page/screens/log_in_page.dart';
+import 'package:yoo_rider_account_page/screens/notification_settings_page.dart';
+import 'package:yoo_rider_account_page/screens/notifications_page.dart';
+import 'package:yoo_rider_account_page/screens/profile_and_security_page.dart';
 import 'package:yoo_rider_account_page/screens/rider_account_page.dart';
 
 class RouteGenerator {
@@ -27,6 +31,14 @@ class RouteGenerator {
 
       case LandingPage.routeName:
         return MaterialPageRoute(builder: (_) => LandingPage());
+      case HelpCentre.routeName:
+        return MaterialPageRoute(builder: (_) => HelpCentre());
+      case NotificationsPage.routeName:
+        return MaterialPageRoute(builder: (_) => NotificationsPage());
+      case ProfileSecurity.routeName:
+        return MaterialPageRoute(builder: (_) => ProfileSecurity());
+      case NotificationSettings.routeName:
+        return MaterialPageRoute(builder: (_) => NotificationSettings());
 
       default:
         return _noPageFound();

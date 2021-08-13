@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoo_rider_account_page/routes/route_generator.dart';
 import 'package:yoo_rider_account_page/screens/notification_settings_page.dart';
 import 'package:yoo_rider_account_page/widgets/notification_items_widgets.dart';
 import 'package:yoo_rider_account_page/widgets/notification_widgets.dart';
@@ -15,7 +16,7 @@ class NotificationsPage extends StatelessWidget {
       //   actions: [
       //     IconButton(
       //         onPressed: () {
-      //           Navigator.of(context).pushNamed(NotificationSettings.routeName);
+      //           RouteGenerator.navigateTo(NotificationSettings.routeName);
       //         },
       //         icon: Icon(Icons.settings)),
       //   ],
