@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yoo_rider_account_page/widgets/order_cancelled_widget.dart';
+import 'package:yoo_rider_account_page/widgets/order_completed_widget.dart';
+import 'package:yoo_rider_account_page/widgets/order_ongoing_widgets.dart';
 
 class OrderPage extends StatefulWidget {
   @override
@@ -23,19 +26,12 @@ class _OrderPageState extends State<OrderPage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            _buildListViewWithName('Ongoing'),
-            _buildListViewWithName('Completed'),
-            _buildListViewWithName('Cancelled'),
+            OrderOngoingWidget(),
+            OrderCompletedWidget(),
+            OrderCancelledWidget()
           ],
         ),
       ),
     );
-  }
-
-  ListView _buildListViewWithName(String s) {
-    return ListView.builder(
-        itemBuilder: (context, index) => ListTile(
-              title: Text(s + '$index'),
-            ));
   }
 }
