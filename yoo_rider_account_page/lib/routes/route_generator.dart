@@ -6,6 +6,7 @@ import 'package:yoo_rider_account_page/screens/notification_settings_page.dart';
 import 'package:yoo_rider_account_page/screens/notifications_page.dart';
 import 'package:yoo_rider_account_page/screens/profile_and_security_page.dart';
 import 'package:yoo_rider_account_page/screens/rider_account_page.dart';
+import 'package:yoo_rider_account_page/screens/rider_income_summary_page.dart';
 
 class RouteGenerator {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -39,6 +40,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ProfileSecurity());
       case NotificationSettings.routeName:
         return MaterialPageRoute(builder: (_) => NotificationSettings());
+      case RiderIncomeSummary.routeName:
+        return MaterialPageRoute(builder: (_) => RiderIncomeSummary());
 
       default:
         return _noPageFound();
