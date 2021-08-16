@@ -13,7 +13,6 @@ class OrderCompletedWidget extends StatelessWidget {
         Vehicle: "Motorcycle",
         Rate: 141.50),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scrollbar(

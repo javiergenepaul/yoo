@@ -26,9 +26,9 @@ class _OrderPageState extends State<OrderPage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            OrderOngoingWidget('Ongoing'),
-            OrderCompletedWidget('Completed'),
-            OrderCancelledWidget('Cancelled')
+            OrderOngoingWidget(),
+            OrderCompletedWidget(),
+            OrderCancelledWidget()
           ],
         ),
       ),
