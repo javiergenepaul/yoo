@@ -9,16 +9,10 @@ class OrderCompletedItem extends StatefulWidget {
   final String DropOff;
   final String Vehicle;
   final double Rate;
+  final String Status;
 
-  OrderCompletedItem(
-    this.TransactionID,
-    this.Schedule,
-    this.Time,
-    this.Pickup,
-    this.DropOff,
-    this.Vehicle,
-    this.Rate,
-  );
+  OrderCompletedItem(this.TransactionID, this.Schedule, this.Time, this.Pickup,
+      this.DropOff, this.Vehicle, this.Rate, this.Status);
 
   @override
   _State createState() => _State();
@@ -90,14 +84,15 @@ class _State extends State<OrderCompletedItem> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => OrderCompletedDetailsPage(
+                      builder: (context) => OrderDetailsPage(
                           widget.TransactionID,
                           widget.Schedule,
                           widget.Time,
                           widget.Pickup,
                           widget.DropOff,
                           widget.Vehicle,
-                          widget.Rate)));
+                          widget.Rate,
+                          widget.Status)));
             },
           )
         ],

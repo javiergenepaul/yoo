@@ -27,7 +27,8 @@ class OrderCompletedWidget extends StatelessWidget {
             sampleOrder[i].Pickup,
             sampleOrder[i].DropOff,
             sampleOrder[i].Vehicle,
-            sampleOrder[i].Rate),
+            sampleOrder[i].Rate,
+            "Completed"),
       ),
     );
   }

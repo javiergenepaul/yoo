@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class OrderCompletedDetailsPage extends StatelessWidget {
+class OrderDetailsPage extends StatelessWidget {
   final String TransactionID;
   final String Schedule;
   final String Time;
@@ -8,15 +8,16 @@ class OrderCompletedDetailsPage extends StatelessWidget {
   final String DropOff;
   final String Vehicle;
   final double Rate;
+  final String Status;
 
-  OrderCompletedDetailsPage(this.TransactionID, this.Schedule, this.Time,
-      this.Pickup, this.DropOff, this.Vehicle, this.Rate);
+  OrderDetailsPage(this.TransactionID, this.Schedule, this.Time, this.Pickup,
+      this.DropOff, this.Vehicle, this.Rate, this.Status);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Order Details Completed"),
+        title: Text("$Status"),
       ),
       body: Container(
         child: Column(
@@ -96,11 +97,12 @@ class OrderCompletedDetailsPage extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
+                                  //mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Column(
                                       children: [
-                                        Text("sample"),
-                                        Text("Sample")
+                                        Text("Delivery Details"),
+                                        Text("Pick Up")
                                       ],
                                     ),
                                   ],

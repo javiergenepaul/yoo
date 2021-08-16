@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/models/order_model.dart';
-import 'package:yoo_rider_account_page/widgets/order_ongoing_items_widgets.dart';
+
+import 'order_completed_items_widget.dart';
 
 class OrderOngoingWidget extends StatelessWidget {
+  // final String Status;
+
+  // OrderOngoingWidget(this.Status);
+
   final List<OrderModel> sampleOrder = [
     OrderModel(
         TransactionID: "1234-56789",
@@ -52,14 +57,15 @@ class OrderOngoingWidget extends StatelessWidget {
       child: ListView.builder(
         padding: EdgeInsets.all(8.0),
         itemCount: sampleOrder.length,
-        itemBuilder: (ctx, i) => OrderOngoingItem(
+        itemBuilder: (ctx, i) => OrderCompletedItem(
             sampleOrder[i].TransactionID,
             sampleOrder[i].Schedule,
             sampleOrder[i].Time,
             sampleOrder[i].Pickup,
             sampleOrder[i].DropOff,
             sampleOrder[i].Vehicle,
-            sampleOrder[i].Rate),
+            sampleOrder[i].Rate,
+            "Ongoing"),
       ),
     );
   }
