@@ -1,8 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/widgets/daily_bar_data.dart';
+import 'package:yoo_rider_account_page/widgets/weekly_bar_data.dart';
 
-class DailyBarChart extends StatelessWidget {
+class WeeklyBarChart extends StatelessWidget {
   final double barWidth = 30;
 
   @override
@@ -27,7 +28,7 @@ class DailyBarChart extends StatelessWidget {
                     bottomTitles: BarTitles.getTopBottomTitles(),
                     leftTitles: BarTitles.getSideTitles(),
                   ),
-                  barGroups: DailyBarData.barData
+                  barGroups: WeeklyBarData.barData
                       .map(
                         (data) => BarChartGroupData(x: data.id, barRods: [
                           BarChartRodData(
@@ -59,7 +60,7 @@ class BarTitles {
           fontSize: 10,
         ),
         margin: 10,
-        getTitles: (double id) => DailyBarData.barData
+        getTitles: (double id) => WeeklyBarData.barData
             .firstWhere((element) => element.id == id.toInt())
             .name,
       );
@@ -70,7 +71,7 @@ class BarTitles {
           color: Colors.black,
           fontSize: 10,
         ),
-        interval: DailyBarData.interval.toDouble(),
+        interval: WeeklyBarData.interval.toDouble(),
         margin: 10,
         getTitles: (double value) => '${value.toInt()}k',
       );
