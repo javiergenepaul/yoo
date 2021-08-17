@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/screens/order_Ongoing_details_page.dart';
+import 'package:yoo_rider_account_page/screens/order_details_page.dart';
+//import 'package:yoo_rider_account_page/screens/order_Ongoing_details_page.dart';
 
 class OrderOngoingItem extends StatefulWidget {
   final String TransactionID;
@@ -9,16 +10,10 @@ class OrderOngoingItem extends StatefulWidget {
   final String DropOff;
   final String Vehicle;
   final double Rate;
+  final String Status;
 
-  OrderOngoingItem(
-    this.TransactionID,
-    this.Schedule,
-    this.Time,
-    this.Pickup,
-    this.DropOff,
-    this.Vehicle,
-    this.Rate,
-  );
+  OrderOngoingItem(this.TransactionID, this.Schedule, this.Time, this.Pickup,
+      this.DropOff, this.Vehicle, this.Rate, this.Status);
 
   @override
   _State createState() => _State();
@@ -90,14 +85,15 @@ class _State extends State<OrderOngoingItem> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => OrderOngoingDetailsPage(
+                      builder: (context) => OrderDetailsPage(
                           widget.TransactionID,
                           widget.Schedule,
                           widget.Time,
                           widget.Pickup,
                           widget.DropOff,
                           widget.Vehicle,
-                          widget.Rate)));
+                          widget.Rate,
+                          'Ongoing')));
             },
           )
         ],

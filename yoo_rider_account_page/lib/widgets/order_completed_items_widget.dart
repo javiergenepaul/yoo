@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/models/order_model.dart';
 import 'package:yoo_rider_account_page/screens/order_details_page.dart';
 
 class OrderCompletedItem extends StatefulWidget {
