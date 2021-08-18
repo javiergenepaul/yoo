@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/services/enum.dart';
+import 'package:yoo_rider_account_page/data/enum.dart';
 
 class OrderDetailsPage extends StatelessWidget {
   final String TransactionID;
@@ -10,6 +10,17 @@ class OrderDetailsPage extends StatelessWidget {
   final String Vehicle;
   final double Rate;
   final Order orderDetailsPage;
+  //final String DateCompleted;
+
+  // final Ongoing ongoing;
+  // final Completed completed;
+  // final Cancelled cancelled;
+
+  // const OrderDetailsPage({
+  //   required this.ongoing,
+  //   required this.completed,
+  //   required this.cancelled,
+  // });
 
   OrderDetailsPage(
     this.TransactionID,
@@ -20,6 +31,7 @@ class OrderDetailsPage extends StatelessWidget {
     this.Vehicle,
     this.Rate,
     this.orderDetailsPage,
+    //this.DateCompleted,
   );
 
   @override
@@ -32,14 +44,15 @@ class OrderDetailsPage extends StatelessWidget {
       return OrderCancelledDetailsPage(orderDetailsPage.displayPage);
     } else {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(orderDetailsPage.displayPage),
+        body: Center(
+          child: Text("Page Not Found"),
         ),
       );
     }
   }
 }
 
+//Widget For Ongoing Details Page
 Widget OrderOngoingDetailsPage(AppbarTitle) {
   return Scaffold(
     appBar: AppBar(
@@ -53,6 +66,7 @@ Widget OrderOngoingDetailsPage(AppbarTitle) {
   );
 }
 
+//Widget for Ongoing Details Page
 Widget OrderCompletedDetailsPage(AppbarTitle) {
   return Scaffold(
     appBar: AppBar(
@@ -66,6 +80,7 @@ Widget OrderCompletedDetailsPage(AppbarTitle) {
   );
 }
 
+//Widget for Order Cancelled Page
 Widget OrderCancelledDetailsPage(AppbarTitle) {
   return Scaffold(
     appBar: AppBar(
