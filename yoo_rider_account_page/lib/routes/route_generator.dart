@@ -26,10 +26,8 @@ class RouteGenerator {
     switch (settings.name) {
       case RiderAccountPage.routeName:
         return MaterialPageRoute(builder: (_) => RiderAccountPage());
-
       case LogInPage.routeName:
         return MaterialPageRoute(builder: (_) => LogInPage());
-
       case LandingPage.routeName:
         return MaterialPageRoute(builder: (_) => LandingPage());
       case HelpCentre.routeName:

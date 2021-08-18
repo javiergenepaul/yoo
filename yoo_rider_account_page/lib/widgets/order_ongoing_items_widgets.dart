@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/screens/order_details_page.dart';
+import 'package:yoo_rider_account_page/services/enum.dart';
 
 class OrderOngoingItem extends StatefulWidget {
   final String TransactionID;
@@ -9,10 +10,9 @@ class OrderOngoingItem extends StatefulWidget {
   final String DropOff;
   final String Vehicle;
   final double Rate;
-  final String Status;
 
   OrderOngoingItem(this.TransactionID, this.Schedule, this.Time, this.Pickup,
-      this.DropOff, this.Vehicle, this.Rate, this.Status);
+      this.DropOff, this.Vehicle, this.Rate);
 
   @override
   _State createState() => _State();
@@ -92,7 +92,7 @@ class _State extends State<OrderOngoingItem> {
                           widget.DropOff,
                           widget.Vehicle,
                           widget.Rate,
-                          "Ongoing")));
+                          Order.OngoingPage)));
             },
           )
         ],
