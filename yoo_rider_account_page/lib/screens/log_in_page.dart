@@ -26,6 +26,9 @@ class _LogInPageState extends State<LogInPage> {
       return false;
   }
 
+  //TODO: add Controllers for Inputs
+  //TODO: add Loading Indicator
+
   late LoginRequestModel requestModel;
 
   @override
