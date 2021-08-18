@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/data/enum.dart';
 import 'package:yoo_rider_account_page/models/order_model.dart';
 import 'package:yoo_rider_account_page/screens/order_details_page.dart';
+import 'package:yoo_rider_account_page/services/enum.dart';
 
 class OrderCancelledWidget extends StatelessWidget {
   //Sample List Data
@@ -123,7 +123,12 @@ class OrderCancelledWidget extends StatelessWidget {
                     DropOff,
                     Vehicle,
                     Rate,
-                    Order.CompletedPage,
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    Order.CancelledPage,
                   ),
                 ),
               );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/models/order_model.dart';
 import 'package:yoo_rider_account_page/screens/order_details_page.dart';
-import 'package:yoo_rider_account_page/data/enum.dart';
+import 'package:yoo_rider_account_page/services/enum.dart';
 
 class OrderOngoingWidget extends StatelessWidget {
   final List<Ongoing> sampleOngoingOrder = [
@@ -137,18 +137,25 @@ class OrderOngoingWidget extends StatelessWidget {
             ),
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => OrderDetailsPage(
-                            TransactionID,
-                            Schedule,
-                            Time,
-                            Pickup,
-                            DropOff,
-                            Vehicle,
-                            Rate,
-                            Order.OngoingPage,
-                          )));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OrderDetailsPage(
+                    TransactionID,
+                    Schedule,
+                    Time,
+                    Pickup,
+                    DropOff,
+                    Vehicle,
+                    Rate,
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    Order.OngoingPage,
+                  ),
+                ),
+              );
             },
           )
         ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/data/enum.dart';
+import 'package:yoo_rider_account_page/services/enum.dart';
 
 class OrderDetailsPage extends StatelessWidget {
   final String TransactionID;
@@ -9,8 +9,12 @@ class OrderDetailsPage extends StatelessWidget {
   final String DropOff;
   final String Vehicle;
   final double Rate;
+  final String DateCompleted;
+  final String TimeCompleted;
+  final String DateCancelled;
+  final String TimeCancelled;
+  final String Reason;
   final Order orderDetailsPage;
-  //final String DateCompleted;
 
   // final Ongoing ongoing;
   // final Completed completed;
@@ -30,8 +34,12 @@ class OrderDetailsPage extends StatelessWidget {
     this.DropOff,
     this.Vehicle,
     this.Rate,
+    this.DateCompleted,
+    this.TimeCompleted,
+    this.DateCancelled,
+    this.TimeCancelled,
+    this.Reason,
     this.orderDetailsPage,
-    //this.DateCompleted,
   );
 
   @override
