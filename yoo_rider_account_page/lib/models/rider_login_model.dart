@@ -7,13 +7,13 @@ String loginResponseModelToJson(LoginResponseModel data) =>
     json.encode(data.toJson());
 
 class LoginResponseModel {
+  Driver driver;
+  String token;
+
   LoginResponseModel({
     required this.driver,
     required this.token,
   });
-
-  Driver driver;
-  String token;
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       LoginResponseModel(

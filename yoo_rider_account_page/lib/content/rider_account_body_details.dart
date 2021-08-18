@@ -173,7 +173,7 @@ Widget incomeSummary(BuildContext context) {
         fontWeight: FontWeight.w700,
       ),
     ),
-    trailing: Icon(Icons.arrow_forward_ios_outlined),
+    trailing: Icon(Icons.keyboard_arrow_right_sharp),
     onTap: () => RouteGenerator.navigateTo(RiderIncomeSummary.routeName),
   );
 }
