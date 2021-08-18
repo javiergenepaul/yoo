@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/routes/route_generator.dart';
+import 'package:yoo_rider_account_page/screens/Landing_page.dart';
 import 'package:yoo_rider_account_page/screens/help_centre_page.dart';
+import 'package:yoo_rider_account_page/screens/home_page.dart';
 import 'package:yoo_rider_account_page/screens/log_in_page.dart';
 import 'package:yoo_rider_account_page/screens/notification_settings_page.dart';
 import 'package:yoo_rider_account_page/screens/notifications_page.dart';

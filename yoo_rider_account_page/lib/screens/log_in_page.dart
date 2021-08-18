@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/models/rider_login_model.dart';
 import 'package:yoo_rider_account_page/routes/route_generator.dart';
 import 'package:yoo_rider_account_page/screens/Landing_page.dart';
+import 'package:yoo_rider_account_page/screens/home_page.dart';
 import 'package:yoo_rider_account_page/screens/rider_account_page.dart';
 import 'package:yoo_rider_account_page/services/rider_login_api_service.dart';
 
@@ -62,22 +63,19 @@ class _LogInPageState extends State<LogInPage> {
                         child: Column(
                           children: <Widget>[
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.06,
                               child: TextFormField(
                                 keyboardType: TextInputType.number,
                                 onSaved: (input) =>
                                     requestModel.mobileNumber = input!,
-                                validator: (input) =>
-                                    input!.contains("+1234567890")
-                                        ? "Number only contains integers"
-                                        : null,
+                                validator: (input) => input!.length <= 10
+                                    ? "Should consist of 11 digits"
+                                    : null,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(Icons.mail),
                                   border: new OutlineInputBorder(
                                       borderRadius:
                                           new BorderRadius.circular(5.0),
                                       borderSide: new BorderSide()),
-                                  labelText: 'Contact Number',
                                   hintText: 'Contact Number',
                                 ),
                               ),
@@ -86,7 +84,6 @@ class _LogInPageState extends State<LogInPage> {
                               padding: EdgeInsets.all(10.0),
                             ),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.06,
                               child: TextFormField(
                                 keyboardType: TextInputType.text,
                                 onSaved: (input) =>
@@ -97,7 +94,7 @@ class _LogInPageState extends State<LogInPage> {
                                 obscureText: hidePassword,
                                 decoration: InputDecoration(
                                     prefixIcon: Icon(Icons.vpn_key_sharp),
-                                    suffix: IconButton(
+                                    suffixIcon: IconButton(
                                         onPressed: () {
                                           setState(() {
                                             hidePassword = !hidePassword;
@@ -110,7 +107,6 @@ class _LogInPageState extends State<LogInPage> {
                                         borderRadius:
                                             new BorderRadius.circular(5.0),
                                         borderSide: new BorderSide()),
-                                    labelText: 'Password',
                                     hintText: 'Password'),
                               ),
                             ),

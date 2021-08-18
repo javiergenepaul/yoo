@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yoo_rider_account_page/widgets/add_ons_widget.dart';
 
 class HomePage extends StatefulWidget {
+  static const routeName = '/homepage';
   @override
   _HomePageState createState() => _HomePageState();
 }
