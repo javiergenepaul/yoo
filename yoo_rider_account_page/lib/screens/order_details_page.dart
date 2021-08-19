@@ -35,11 +35,43 @@ class OrderDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (orderDetailsPage == Order.OngoingPage) {
-      return OrderOngoingDetailsPage(orderDetailsPage.displayPage);
+      return OrderOngoingDetailsPage(
+        orderDetailsPage.displayPage, //App bar title
+        TransactionID,
+        Schedule,
+        Time,
+        Pickup,
+        DropOff,
+        Vehicle,
+        Rate,
+      );
     } else if (orderDetailsPage == Order.CompletedPage) {
-      return OrderCompletedDetailsPage(orderDetailsPage.displayPage);
+      return OrderCompletedDetailsPage(
+        orderDetailsPage.displayPage, //App bar title
+        TransactionID,
+        Schedule,
+        Time,
+        Pickup,
+        DropOff,
+        Vehicle,
+        Rate,
+        DateCompleted,
+        TimeCompleted,
+      );
     } else if (orderDetailsPage == Order.CancelledPage) {
-      return OrderCancelledDetailsPage(orderDetailsPage.displayPage);
+      return OrderCancelledDetailsPage(
+        orderDetailsPage.displayPage, //App bar title
+        TransactionID,
+        Schedule,
+        Time,
+        Pickup,
+        DropOff,
+        Vehicle,
+        Rate,
+        DateCancelled,
+        TimeCancelled,
+        Reason,
+      );
     } else {
       return Scaffold(
         body: Center(
@@ -51,7 +83,16 @@ class OrderDetailsPage extends StatelessWidget {
 }
 
 //Widget For Ongoing Details Page
-Widget OrderOngoingDetailsPage(AppbarTitle) {
+Widget OrderOngoingDetailsPage(
+  String AppbarTitle,
+  String transactionID,
+  String schedule,
+  String time,
+  String pickup,
+  String dropOff,
+  String vehicle,
+  double rate,
+) {
   return Scaffold(
     appBar: AppBar(
       title: Text(AppbarTitle),
@@ -65,7 +106,18 @@ Widget OrderOngoingDetailsPage(AppbarTitle) {
 }
 
 //Widget for Ongoing Details Page
-Widget OrderCompletedDetailsPage(AppbarTitle) {
+Widget OrderCompletedDetailsPage(
+  AppbarTitle,
+  String transactionID,
+  String schedule,
+  String time,
+  String pickup,
+  String dropOff,
+  String vehicle,
+  double rate,
+  String dateCompleted,
+  String timeCompleted,
+) {
   return Scaffold(
     appBar: AppBar(
       title: Text(AppbarTitle),
@@ -79,7 +131,19 @@ Widget OrderCompletedDetailsPage(AppbarTitle) {
 }
 
 //Widget for Order Cancelled Page
-Widget OrderCancelledDetailsPage(AppbarTitle) {
+Widget OrderCancelledDetailsPage(
+  AppbarTitle,
+  String transactionID,
+  String schedule,
+  String time,
+  String pickup,
+  String dropOff,
+  String vehicle,
+  double rate,
+  String dateCancelled,
+  String timeCancelled,
+  String reason,
+) {
   return Scaffold(
     appBar: AppBar(
       title: Text(AppbarTitle),
