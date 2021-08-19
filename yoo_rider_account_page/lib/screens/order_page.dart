@@ -3,12 +3,7 @@ import 'package:yoo_rider_account_page/widgets/order_cancelled_widget.dart';
 import 'package:yoo_rider_account_page/widgets/order_completed_widget.dart';
 import 'package:yoo_rider_account_page/widgets/order_ongoing_widgets.dart';
 
-class OrderPage extends StatefulWidget {
-  @override
-  _OrderPageState createState() => _OrderPageState();
-}
-
-class _OrderPageState extends State<OrderPage> {
+class OrderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
