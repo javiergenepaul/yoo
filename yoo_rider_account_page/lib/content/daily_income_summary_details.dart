@@ -102,34 +102,34 @@ class DailyIncomeSummary extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget dailyIncomeExpand(BuildContext context) {
-  return Container(
-    width: MediaQuery.of(context).size.width * .3,
-    height: MediaQuery.of(context).size.width * .3,
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      border: Border.all(
-        color: active,
-        width: 3,
+  Widget dailyIncomeExpand(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * .3,
+      height: MediaQuery.of(context).size.width * .3,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: active,
+          width: 3,
+        ),
       ),
-    ),
-    child: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'PHP200',
-            style: TextStyle(
-                color: active, fontWeight: FontWeight.w500, fontSize: 18),
-          ),
-          Text(
-            'Today',
-            style: TextStyle(fontSize: 13),
-          ),
-        ],
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'PHP200',
+              style: TextStyle(
+                  color: active, fontWeight: FontWeight.w500, fontSize: 18),
+            ),
+            Text(
+              'Today',
+              style: TextStyle(fontSize: 13),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

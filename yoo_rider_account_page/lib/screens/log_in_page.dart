@@ -147,7 +147,7 @@ class _LogInPageState extends State<LogInPage> {
                                               LandingPage.routeName);
                                           print(value.token);
                                           print(value.driver);
-                                        } else if (value.token.isEmpty) {
+                                        } else {
                                           final snackbar = SnackBar(
                                             content: Text('User not found'),
                                           );

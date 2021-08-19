@@ -24,7 +24,7 @@ class AccountBodyDetails extends StatelessWidget {
                     height: 10,
                   ),
                   username(),
-                  profileSecurityButton(context),
+                  profileSecurityButton(),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,10 +46,10 @@ class AccountBodyDetails extends StatelessWidget {
             child: SafeArea(
               child: Column(
                 children: [
-                  incomeSummary(context),
-                  helpCentre(context),
-                  notificationSettings(context),
-                  privacyPolicy(context),
+                  incomeSummary(),
+                  helpCentre(),
+                  notificationSettings(),
+                  privacyPolicy(),
                 ],
               ),
             ),
@@ -58,125 +58,125 @@ class AccountBodyDetails extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget avatar() {
-  return CircleAvatar(
-    radius: 50,
-    child: Icon(Icons.person),
-  );
-}
+  Widget avatar() {
+    return CircleAvatar(
+      radius: 50,
+      child: Icon(Icons.person),
+    );
+  }
 
-Widget username() {
-  return Text(
-    'Rider Juan dela Cruz',
-    style: TextStyle(
-      fontSize: 22,
-      fontWeight: FontWeight.bold,
-    ),
-  );
-}
-
-Widget accountinfo(BuildContext context) {
-  return Container(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        rating(context),
-        followers(context),
-      ],
-    ),
-  );
-}
-
-Widget rating(BuildContext context) {
-  return Container(
-    width: MediaQuery.of(context).size.width * .2,
-    height: MediaQuery.of(context).size.width * .2,
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      border: Border.all(
-        color: active,
-        width: 3,
-      ),
-    ),
-    child: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '4.9',
-            style: TextStyle(
-                color: active, fontWeight: FontWeight.w500, fontSize: 18),
-          ),
-          Text(
-            'Rating',
-            style: TextStyle(fontSize: 13),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-Widget followers(BuildContext context) {
-  return Container(
-    width: MediaQuery.of(context).size.width * .2,
-    height: MediaQuery.of(context).size.width * .2,
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      border: Border.all(
-        color: active,
-        width: 3,
-      ),
-    ),
-    child: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '15',
-            style: TextStyle(
-                color: active, fontWeight: FontWeight.w500, fontSize: 18),
-          ),
-          Text(
-            'Followers',
-            style: TextStyle(fontSize: 13),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-Widget profileSecurityButton(BuildContext context) {
-  return Container(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        FlatButton(
-          child: Text('Profile & Security'),
-          onPressed: () => RouteGenerator.navigateTo(ProfileSecurity.routeName),
-        ),
-        Icon(Icons.arrow_forward_ios_outlined),
-      ],
-    ),
-  );
-}
-
-Widget incomeSummary(BuildContext context) {
-  return ListTile(
-    title: Text(
-      'Income Summary',
+  Widget username() {
+    return Text(
+      'Rider Juan dela Cruz',
       style: TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.w700,
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
       ),
-    ),
-    trailing: Icon(Icons.keyboard_arrow_right_sharp),
-    onTap: () => RouteGenerator.navigateTo(RiderIncomeSummary.routeName),
-  );
-}
+    );
+  }
+
+// Widget accountinfo(BuildContext context) {
+//   return Container(
+//     child: Row(
+//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//       children: [
+//         rating(context),
+//         followers(context),
+//       ],
+//     ),
+//   );
+// }
+
+  Widget rating(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * .2,
+      height: MediaQuery.of(context).size.width * .2,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: active,
+          width: 3,
+        ),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '4.9',
+              style: TextStyle(
+                  color: active, fontWeight: FontWeight.w500, fontSize: 18),
+            ),
+            Text(
+              'Rating',
+              style: TextStyle(fontSize: 13),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget followers(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * .2,
+      height: MediaQuery.of(context).size.width * .2,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: active,
+          width: 3,
+        ),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '15',
+              style: TextStyle(
+                  color: active, fontWeight: FontWeight.w500, fontSize: 18),
+            ),
+            Text(
+              'Followers',
+              style: TextStyle(fontSize: 13),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget profileSecurityButton() {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FlatButton(
+            child: Text('Profile & Security'),
+            onPressed: () =>
+                RouteGenerator.navigateTo(ProfileSecurity.routeName),
+          ),
+          Icon(Icons.arrow_forward_ios_outlined),
+        ],
+      ),
+    );
+  }
+
+  Widget incomeSummary() {
+    return ListTile(
+      title: Text(
+        'Income Summary',
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      trailing: Icon(Icons.keyboard_arrow_right_sharp),
+      onTap: () => RouteGenerator.navigateTo(RiderIncomeSummary.routeName),
+    );
+  }
 // return ExpansionTile(
 //   childrenPadding: EdgeInsets.all(10),
 //   title: Text('Income Summary'),
@@ -193,44 +193,45 @@ Widget incomeSummary(BuildContext context) {
 //   ],
 // );
 
-Widget helpCentre(BuildContext context) {
-  return ListTile(
-    title: Text(
-      ' Help Centre',
-      style: TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.w700,
+  Widget helpCentre() {
+    return ListTile(
+      title: Text(
+        ' Help Centre',
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w700,
+        ),
       ),
-    ),
-    trailing: Icon(Icons.arrow_forward_ios_outlined),
-    onTap: () => RouteGenerator.navigateTo(HelpCentre.routeName),
-  );
-}
+      trailing: Icon(Icons.arrow_forward_ios_outlined),
+      onTap: () => RouteGenerator.navigateTo(HelpCentre.routeName),
+    );
+  }
 
-Widget notificationSettings(BuildContext context) {
-  return ListTile(
-    title: Text(
-      'Notification Settings',
-      style: TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.w700,
+  Widget notificationSettings() {
+    return ListTile(
+      title: Text(
+        'Notification Settings',
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w700,
+        ),
       ),
-    ),
-    trailing: Icon(Icons.arrow_forward_ios_outlined),
-    onTap: () => RouteGenerator.navigateTo(NotificationsPage.routeName),
-  );
-}
+      trailing: Icon(Icons.arrow_forward_ios_outlined),
+      onTap: () => RouteGenerator.navigateTo(NotificationsPage.routeName),
+    );
+  }
 
-Widget privacyPolicy(BuildContext context) {
-  return ListTile(
-    title: Text(
-      'Privacy Policy',
-      style: TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.w700,
+  Widget privacyPolicy() {
+    return ListTile(
+      title: Text(
+        'Privacy Policy',
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w700,
+        ),
       ),
-    ),
-    trailing: Icon(Icons.arrow_forward_ios_outlined),
-    onTap: () => null,
-  );
+      trailing: Icon(Icons.arrow_forward_ios_outlined),
+      onTap: () => null,
+    );
+  }
 }
