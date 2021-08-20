@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:yoo_rider_account_page/data/fake_data.dart';
+import 'package:yoo_rider_account_page/models/sample_user_rider_model.dart';
 import 'package:yoo_rider_account_page/routes/route_generator.dart';
 import 'package:yoo_rider_account_page/screens/help_centre_page.dart';
 import 'package:yoo_rider_account_page/screens/notifications_page.dart';
 import 'package:yoo_rider_account_page/screens/profile_and_security_page.dart';
 import 'package:yoo_rider_account_page/screens/rider_income_summary_page.dart';
+import 'package:yoo_rider_account_page/widgets/profile_widgets.dart';
 import 'package:yoo_rider_account_page/widgets/style_theme.dart';
 
-class AccountBodyDetails extends StatelessWidget {
+class AccountBodyDetails extends StatefulWidget {
+  @override
+  State<AccountBodyDetails> createState() => _AccountBodyDetailsState();
+}
+
+class _AccountBodyDetailsState extends State<AccountBodyDetails> {
   @override
   Widget build(BuildContext context) {
+    final user = UserPreferences.getUser();
     return Container(
       child: Column(
         children: <Widget>[
@@ -19,18 +28,33 @@ class AccountBodyDetails extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  avatar(),
+                  ProfileWidget(
+                    defaultImage: user.defaultImage,
+                    onClicked: () async {
+                      await RouteGenerator.navigateTo(
+                          ProfileSecurity.routeName);
+                      setState(() {});
+                    },
+                  ),
                   SizedBox(
                     height: 10,
                   ),
-                  username(),
+                  username(user),
                   profileSecurityButton(),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        rating(context),
-                        followers(context),
+                      children: <Widget>[
+                        buttonDetails(context, '4.8', 'Rating'),
+                        Container(
+                          height: 24,
+                          child: VerticalDivider(
+                            color: Colors.black,
+                          ),
+                        ),
+                        buttonDetails(context, '100', 'Followers'),
+                        // rating(context),
+                        // followers(context),
                       ],
                     ),
                   ),
@@ -59,6 +83,29 @@ class AccountBodyDetails extends StatelessWidget {
     );
   }
 
+  Widget buttonDetails(BuildContext context, String value, String text) {
+    return MaterialButton(
+      onPressed: () {},
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            value,
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          SizedBox(
+            height: 2,
+          ),
+          Text(
+            text,
+            style: TextStyle(fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget avatar() {
     return CircleAvatar(
       radius: 50,
@@ -66,27 +113,15 @@ class AccountBodyDetails extends StatelessWidget {
     );
   }
 
-  Widget username() {
+  Widget username(User user) {
     return Text(
-      'Rider Juan dela Cruz',
+      '${user.userName}',
       style: TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
     );
   }
-
-// Widget accountinfo(BuildContext context) {
-//   return Container(
-//     child: Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//       children: [
-//         rating(context),
-//         followers(context),
-//       ],
-//     ),
-//   );
-// }
 
   Widget rating(BuildContext context) {
     return Container(
@@ -155,8 +190,10 @@ class AccountBodyDetails extends StatelessWidget {
         children: [
           FlatButton(
             child: Text('Profile & Security'),
-            onPressed: () =>
-                RouteGenerator.navigateTo(ProfileSecurity.routeName),
+            onPressed: () async {
+              await RouteGenerator.navigateTo(ProfileSecurity.routeName);
+              setState(() {});
+            },
           ),
           Icon(Icons.arrow_forward_ios_outlined),
         ],
@@ -177,21 +214,6 @@ class AccountBodyDetails extends StatelessWidget {
       onTap: () => RouteGenerator.navigateTo(RiderIncomeSummary.routeName),
     );
   }
-// return ExpansionTile(
-//   childrenPadding: EdgeInsets.all(10),
-//   title: Text('Income Summary'),
-//   trailing: Icon(Icons.expand_more),
-//   children: [
-//     Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//       children: [
-//         dailyIncomeExpand(context),
-//         weeklyIncomeExpand(context),
-//         monthlyIncomeExpand(context),
-//       ],
-//     )
-//   ],
-// );
 
   Widget helpCentre() {
     return ListTile(

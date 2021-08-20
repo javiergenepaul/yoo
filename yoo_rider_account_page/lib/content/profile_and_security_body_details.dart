@@ -1,6 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
+import 'package:yoo_rider_account_page/data/fake_data.dart';
+import 'package:yoo_rider_account_page/models/sample_user_rider_model.dart';
+import 'package:yoo_rider_account_page/widgets/profile_widgets.dart';
 
 class ProfileSecurityBody extends StatefulWidget {
   @override
@@ -8,16 +14,27 @@ class ProfileSecurityBody extends StatefulWidget {
 }
 
 class _ProfileSecurityBodyState extends State<ProfileSecurityBody> {
-  late PickedFile _imageFile;
-  final ImagePicker _picker = ImagePicker();
+  // User user = UserPreferences.myUser;
+  late User user;
 
-  void takePhoto(ImageSource source) async {
-    final pickedFile = await _picker.getImage(
+  @override
+  void initState() {
+    super.initState();
+    user = UserPreferences.getUser();
+  }
+
+  Future takePhoto(ImageSource source) async {
+    final image = await ImagePicker().getImage(
       source: source,
     );
-    setState(() {
-      _imageFile = pickedFile!;
-    });
+
+    if (image == null) return;
+    final directory = await getApplicationDocumentsDirectory();
+    final name = basename(image.path);
+    final imageFile = File('${directory.path}/$name');
+    final newImage = await File(image.path).copy(imageFile.path);
+
+    setState(() => user = user.copy(defaultImage: newImage.path));
   }
 
   @override
@@ -33,208 +50,109 @@ class _ProfileSecurityBodyState extends State<ProfileSecurityBody> {
                   SizedBox(
                     height: 20,
                   ),
-                  profileavatar(context)
+                  ProfileWidget(
+                      isEdit: true,
+                      defaultImage: user.defaultImage,
+                      onClicked: () {
+                        //ModalBottomSheet
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => Container(
+                            height: MediaQuery.of(context).size.height * 0.16,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                ListTile(
+                                  leading: Icon(Icons.camera),
+                                  title: Text('Camera'),
+                                  onTap: () {
+                                    takePhoto(ImageSource.camera);
+                                  },
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.image),
+                                  title: Text('Gallery'),
+                                  onTap: () {
+                                    takePhoto(ImageSource.gallery);
+                                  },
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ProfileTextField(
+                    label: 'Full Name',
+                    text: user.userName,
+                    onChanged: (userName) =>
+                        user = user.copy(userName: userName),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ProfileTextField(
+                    label: 'Contact Number',
+                    text: user.number,
+                    onChanged: (number) => user = user.copy(number: number),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ProfileTextField(
+                    label: 'Email Address',
+                    text: user.email,
+                    onChanged: (email) => user = user.copy(email: email),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: RaisedButton(
+                      onPressed: () {
+                        UserPreferences.setUser(user);
+                        Navigator.of(context).pop();
+                        print(user.userName);
+                        print(user.number);
+                        print(user.email);
+                      },
+                      child: Text('SAVE'),
+                      padding: EdgeInsets.all(10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                  SafeArea(
+                    child: Column(
+                      children: [
+                        passwordchange(),
+                        language(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
-          SafeArea(
-            child: Column(
-              children: [
-                editname(),
-                editcontact(),
-                editemail(),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                saveButton(),
-              ],
-            ),
-          ),
-          Divider(),
-          SafeArea(
-            child: Column(
-              children: [
-                passwordchange(),
-                language(),
-              ],
-            ),
-          ),
         ],
-      ),
-    );
-  }
-
-  Widget profileavatar(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      width: 100,
-      child: Stack(
-        fit: StackFit.expand,
-        overflow: Overflow.visible,
-        children: [
-          CircleAvatar(
-              backgroundColor: Colors.white.withOpacity(.2),
-              backgroundImage: //_imageFile == null ?
-                  AssetImage("assets/user_picture.png")
-              // : FileImage(
-              //     File(_imageFile.path),
-              //   ),
-              ),
-          Positioned(
-            right: -3,
-            bottom: -3,
-            child: SizedBox(
-              height: 46,
-              width: 46,
-              child: InkWell(
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context, builder: (builder) => bottomSheet());
-                },
-                child: Icon(
-                  Icons.camera_alt,
-                  color: Colors.teal,
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-//ModalBottomSheetNavigation
-  Widget bottomSheet() {
-    return Container(
-      height: 100,
-      margin: EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
-      ),
-      child: Column(
-        children: <Widget>[
-          Text(
-            "Choose Profile Photo",
-            style: TextStyle(
-              fontSize: 20,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    takePhoto(ImageSource.camera);
-                  },
-                  label: Text("Camera"),
-                  icon: Icon(Icons.camera),
-                ),
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    takePhoto(ImageSource.gallery);
-                  },
-                  label: Text("Gallery"),
-                  icon: Icon(Icons.image),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget editname() {
-    return ListTile(
-      leading: Icon(Icons.person),
-      title: Text('Rider Juan dela Cruz'),
-    );
-  }
-
-  Widget editcontact() {
-    return ListTile(
-      leading: Icon(Icons.phone),
-      title: Text('0928476982'),
-    );
-  }
-
-  Widget editemail() {
-    return ListTile(
-      leading: Icon(Icons.email),
-      title: TextFormField(
-        decoration: InputDecoration.collapsed(
-          hintText: 'Email Address',
-          hintStyle: TextStyle(fontSize: 15),
-        ),
-      ),
-    );
-  }
-
-  Widget saveButton() {
-    return RaisedButton(
-      onPressed: () {},
-      child: Text('SAVE'),
-      padding: EdgeInsets.all(10),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
       ),
     );
   }
 
   Widget passwordchange() {
-    return Container(
-      padding: EdgeInsets.only(
-        left: 20,
-        right: 20,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Change Password',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.arrow_forward_ios_outlined),
-          ),
-        ],
-      ),
+    return ListTile(
+      title: Text('Change Password'),
+      trailing: Icon(Icons.arrow_forward_ios_outlined),
+      onTap: () {},
     );
   }
 
   Widget language() {
-    return Container(
-      padding: EdgeInsets.only(
-        left: 20,
-        right: 20,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Language',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.arrow_forward_ios_outlined),
-          ),
-        ],
-      ),
+    return ListTile(
+      title: Text('Language'),
+      trailing: Icon(Icons.arrow_forward_ios_outlined),
+      onTap: () {},
     );
   }
 }

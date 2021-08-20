@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   var date;
   var time;
   static const _initialCameraPosition =
-      CameraPosition(target: LatLng(10.2402, 123.7881), zoom: 15);
+      CameraPosition(target: LatLng(10.2402, 123.7881), zoom: 10);
 
   @override
   Widget build(BuildContext context) {

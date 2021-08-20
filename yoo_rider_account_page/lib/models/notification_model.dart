@@ -1,3 +1,11 @@
+class NotificationList {
+  List<NotificationModel> notifs;
+
+  NotificationList({
+    required this.notifs,
+  });
+}
+
 class NotificationModel {
   final String title;
   final String subtitle;

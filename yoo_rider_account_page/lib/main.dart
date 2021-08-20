@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoo_rider_account_page/data/fake_data.dart';
 import 'package:yoo_rider_account_page/routes/route_generator.dart';
 import 'package:yoo_rider_account_page/screens/Landing_page.dart';
 import 'package:yoo_rider_account_page/screens/help_centre_page.dart';
@@ -10,7 +11,9 @@ import 'package:yoo_rider_account_page/screens/profile_and_security_page.dart';
 import 'package:yoo_rider_account_page/screens/rider_account_page.dart';
 import 'package:yoo_rider_account_page/screens/rider_income_summary_page.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await UserPreferences.init();
   runApp(const MyApp());
 }
 
