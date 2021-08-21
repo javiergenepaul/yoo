@@ -10,6 +10,28 @@ class OrderModel {
   });
 }
 
+class Active {
+  final String TransactionID;
+  final String Schedule;
+  final String Time;
+  final String Pickup;
+  final String DropOff;
+  final String Vehicle;
+  final double Rate;
+  final bool State;
+
+  Active({
+    required this.TransactionID,
+    required this.Schedule,
+    required this.Time,
+    required this.Pickup,
+    required this.DropOff,
+    required this.Vehicle,
+    required this.Rate,
+    required this.State,
+  });
+}
+
 class Ongoing {
   final String TransactionID;
   final String Schedule;

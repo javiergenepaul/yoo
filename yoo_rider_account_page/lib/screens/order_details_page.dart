@@ -99,17 +99,20 @@ Widget OrderOngoingDetailsPage(
     double rate,
     BuildContext context) {
   return Scaffold(
+    // resizeToAvoidBottomInset: false,
     appBar: AppBar(
       title: Text(AppbarTitle),
     ),
-    body: ListView(
+    body: Container(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      children: <Widget>[
-        Header(context, transactionID, rate),
-        SizedBox(height: 8),
-        BodyDetails(orderDetailsPage, context, transactionID, schedule, time,
-            pickup, dropOff, vehicle, rate),
-      ],
+      child: Column(
+        children: <Widget>[
+          Header(context, transactionID, rate),
+          SizedBox(height: 8),
+          BodyDetails(orderDetailsPage, context, transactionID, schedule, time,
+              pickup, dropOff, vehicle, rate),
+        ],
+      ),
     ),
   );
 }
@@ -132,14 +135,16 @@ Widget OrderCompletedDetailsPage(
     appBar: AppBar(
       title: Text(AppbarTitle),
     ),
-    body: ListView(
+    body: Container(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      children: <Widget>[
-        Header(context, transactionID, rate), //Header Widget
-        SizedBox(height: 8),
-        BodyDetails(orderDetailsPage, context, transactionID, schedule, time,
-            pickup, dropOff, vehicle, rate, dateCompleted, timeCompleted),
-      ],
+      child: Column(
+        children: <Widget>[
+          Header(context, transactionID, rate), //Header Widget
+          SizedBox(height: 8),
+          BodyDetails(orderDetailsPage, context, transactionID, schedule, time,
+              pickup, dropOff, vehicle, rate, dateCompleted, timeCompleted),
+        ],
+      ),
     ),
   );
 }
@@ -163,31 +168,33 @@ Widget OrderCancelledDetailsPage(
     appBar: AppBar(
       title: Text(AppbarTitle),
     ),
-    body: ListView(
+    body: Container(
       padding: EdgeInsets.all(16),
-      children: [
-        ListView(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          children: <Widget>[
-            Header(context, transactionID, rate), //Header Widget
-            SizedBox(height: 8),
-            BodyDetails(
-              orderDetailsPage,
-              context,
-              transactionID,
-              schedule,
-              time,
-              pickup,
-              dropOff,
-              vehicle,
-              rate,
-              // dateCancelled,
-              // timeCancelled,
-              // reason,
-            ),
-          ],
-        ),
-      ],
+      child: Column(
+        children: [
+          ListView(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            children: <Widget>[
+              Header(context, transactionID, rate), //Header Widget
+              SizedBox(height: 8),
+              BodyDetails(
+                orderDetailsPage,
+                context,
+                transactionID,
+                schedule,
+                time,
+                pickup,
+                dropOff,
+                vehicle,
+                rate,
+                // dateCancelled,
+                // timeCancelled,
+                // reason,
+              ),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 }
@@ -346,11 +353,24 @@ Widget CompletedDetails(
   );
 }
 
-Widget BodyDetails(orderDetailsPage, context, transactionID, schedule, time,
-    pickup, dropOff, vehicle, rate,
-    [dateCompleted, timeCompleted, dateCancelled, timeCancelled, reason]) {
+Widget BodyDetails(
+  orderDetailsPage,
+  context,
+  transactionID,
+  schedule,
+  time,
+  pickup,
+  dropOff,
+  vehicle,
+  rate, [
+  dateCompleted,
+  timeCompleted,
+  dateCancelled,
+  timeCancelled,
+  reason,
+]) {
   return Container(
-    height: MediaQuery.of(context).size.height,
+    // height: MediaQuery.of(context).size.height,
     width: MediaQuery.of(context).size.width,
     decoration: BoxDecoration(
       color: Colors.white,

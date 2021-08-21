@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yoo_rider_account_page/models/notification_model.dart';
 import 'package:yoo_rider_account_page/models/order_model.dart';
@@ -13,26 +12,56 @@ var ordermodel = [
   )
 ];
 
-var sampleOrder = [
-  Cancelled(
-      TransactionID: "1234-56789",
-      Schedule: "07/07/21 ",
-      Time: "2:12 PM",
-      Pickup: "Pickup",
-      DropOff: "Drop Off",
-      Vehicle: "Motorcycle",
-      Rate: 160.50,
-      DateCancelled: '08/07/2021',
-      TimeCancelled: '1:36 PM',
-      Reason: 'Wrong Location'),
-  Ongoing(
-      TransactionID: "1234-56789",
-      Schedule: "07/07/21 ",
-      Time: "2:12PM",
-      Pickup: "Pickup",
-      DropOff: "Drop Off",
-      Vehicle: "Motorcycle",
-      Rate: 141.50),
+// var sampleOrder = [
+//   Cancelled(
+//       TransactionID: "1234-56789",
+//       Schedule: "07/07/21 ",
+//       Time: "2:12 PM",
+//       Pickup: "Pickup",
+//       DropOff: "Drop Off",
+//       Vehicle: "Motorcycle",
+//       Rate: 160.50,
+//       DateCancelled: '08/07/2021',
+//       TimeCancelled: '1:36 PM',
+//       Reason: 'Wrong Location'),
+//   Ongoing(
+//       TransactionID: "1234-56789",
+//       Schedule: "07/07/21 ",
+//       Time: "2:12PM",
+//       Pickup: "Pickup",
+//       DropOff: "Drop Off",
+//       Vehicle: "Motorcycle",
+//       Rate: 141.50),
+// ];
+
+final List<Active> sampleActiveOrder = [
+  Active(
+      TransactionID: "123-456789",
+      Schedule: "07/07/21",
+      Time: "2:30",
+      Pickup: "PickUp",
+      DropOff: "DropOff",
+      Vehicle: "Vehicle",
+      Rate: 170.00,
+      State: true),
+  Active(
+      TransactionID: "123-456789",
+      Schedule: "07/07/21",
+      Time: "2:30",
+      Pickup: "PickUp",
+      DropOff: "DropOff",
+      Vehicle: "Vehicle",
+      Rate: 170.00,
+      State: true),
+  Active(
+      TransactionID: "123-456789",
+      Schedule: "07/07/21",
+      Time: "2:30",
+      Pickup: "PickUp",
+      DropOff: "DropOff",
+      Vehicle: "Vehicle",
+      Rate: 170.00,
+      State: true),
 ];
 
 final List<Cancelled> sampleCancelledOrder = [
