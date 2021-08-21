@@ -4,9 +4,8 @@ import 'package:yoo_rider_account_page/data/fake_data.dart';
 import 'package:yoo_rider_account_page/models/order_model.dart';
 import 'package:yoo_rider_account_page/screens/order_details_page.dart';
 
-// ignore: must_be_immutable
 class OrderOngoingWidget extends StatelessWidget {
-  List<Ongoing?> ongoings = sampleOngoingOrder;
+  final List<Ongoing?> ongoings = sampleOngoingOrder;
   @override
   Widget build(BuildContext context) {
     return Scrollbar(

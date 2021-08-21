@@ -37,16 +37,29 @@ var sampleOrder = [
 
 final List<Cancelled> sampleCancelledOrder = [
   Cancelled(
-      TransactionID: "1234-56789",
-      Schedule: "07/07/21 ",
-      Time: "2:12 PM",
-      Pickup: "Pickup",
-      DropOff: "Drop Off",
-      Vehicle: "Motorcycle",
-      Rate: 160.50,
-      DateCancelled: '08/07/2021',
-      TimeCancelled: '1:36 PM',
-      Reason: 'Wrong Location'),
+    TransactionID: "1234-56789",
+    Schedule: "07/07/21 ",
+    Time: "2:12 PM",
+    Pickup: "Pickup",
+    DropOff: "Drop Off",
+    Vehicle: "Motorcycle",
+    Rate: 160.50,
+    DateCancelled: '08/07/2021',
+    TimeCancelled: '1:36 PM',
+    Reason: 'Wrong Location',
+  ),
+  Cancelled(
+    TransactionID: "1234-56789",
+    Schedule: "07/07/21 ",
+    Time: "2:12 PM",
+    Pickup: "Pickup",
+    DropOff: "Drop Off",
+    Vehicle: "Motorcycle",
+    Rate: 160.50,
+    DateCancelled: '08/07/2021',
+    TimeCancelled: '1:36 PM',
+    Reason: 'Wrong Location',
+  ),
 ];
 
 final List<Completed> sampleCompletedOrder = [
@@ -58,7 +71,7 @@ final List<Completed> sampleCompletedOrder = [
       DropOff: "Drop Off",
       Vehicle: "Motorcycle",
       Rate: 170.50,
-      DateCompleted: "08/07,21",
+      DateCompleted: "08/07/21",
       TimeCompleted: "1:36 PM"),
 ];
 

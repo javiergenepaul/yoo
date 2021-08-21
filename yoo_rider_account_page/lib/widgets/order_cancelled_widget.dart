@@ -91,7 +91,7 @@ class OrderCancelledWidget extends StatelessWidget {
                     cancelled.DropOff,
                     cancelled.Vehicle,
                     cancelled.Rate,
-                    "", //Date Completed
+                    '', //Date Completed
                     '', //Time Completed
                     cancelled.DateCancelled,
                     cancelled.TimeCancelled,

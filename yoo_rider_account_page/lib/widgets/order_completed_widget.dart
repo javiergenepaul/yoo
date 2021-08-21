@@ -6,7 +6,7 @@ import 'package:yoo_rider_account_page/models/order_model.dart';
 import 'package:yoo_rider_account_page/screens/order_details_page.dart';
 
 class OrderCompletedWidget extends StatelessWidget {
-  final List<Completed?> completeds = sampleCompletedOrder;
+  final List<Completed?> completeds = sampleCompletedOrder; //mao naning OOP
 
   @override
   Widget build(BuildContext context) {
