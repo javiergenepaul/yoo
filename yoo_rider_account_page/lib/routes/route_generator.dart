@@ -5,6 +5,7 @@ import 'package:yoo_rider_account_page/screens/home_page.dart';
 import 'package:yoo_rider_account_page/screens/log_in_page.dart';
 import 'package:yoo_rider_account_page/screens/notification_settings_page.dart';
 import 'package:yoo_rider_account_page/screens/notifications_page.dart';
+import 'package:yoo_rider_account_page/screens/order_navigation_page.dart';
 import 'package:yoo_rider_account_page/screens/profile_and_security_page.dart';
 import 'package:yoo_rider_account_page/screens/rider_account_page.dart';
 import 'package:yoo_rider_account_page/screens/rider_income_summary_page.dart';
@@ -41,6 +42,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => NotificationSettings());
       case RiderIncomeSummary.routeName:
         return MaterialPageRoute(builder: (_) => RiderIncomeSummary());
+      case OrderNavigation.routeName:
+        return MaterialPageRoute(builder: (_) => OrderNavigation());
 
       default:
         return _noPageFound();

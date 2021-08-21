@@ -42,144 +42,198 @@ class _LogInPageState extends State<LogInPage> {
       key: scaffoldKey,
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(left: 20, right: 20),
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: Stack(
             children: <Widget>[
-              Column(
-                children: [
-                  SizedBox(
-                    height: 150,
-                  ),
-                  Text(
-                    "Yoo",
-                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(50.0),
-                  ),
-                  Container(
-                    child: Form(
-                        key: globalFormKey,
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                onSaved: (input) =>
-                                    requestModel.mobileNumber = input!,
-                                validator: (input) => input!.length <= 10
-                                    ? "Should consist of 11 digits"
-                                    : null,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.mail),
-                                  border: new OutlineInputBorder(
+              Container(
+                color: Theme.of(context).primaryColor,
+                child: Opacity(
+                    opacity: 0.5,
+                    child: Image.asset("assets/log_in_bckgrnd.png")),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Image.asset(
+                      "assets/Logo.png",
+                      height: 250,
+                      width: 250,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      child: Form(
+                          key: globalFormKey,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                child: TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  onSaved: (input) =>
+                                      requestModel.mobileNumber = input!,
+                                  validator: (input) => input!.length <= 10
+                                      ? "Should consist of 11 digits"
+                                      : null,
+                                  decoration: InputDecoration(
+                                    prefixIcon: Icon(
+                                      Icons.mail,
+                                      color: Colors.white.withOpacity(.6),
+                                    ),
+                                    border: new OutlineInputBorder(
                                       borderRadius:
                                           new BorderRadius.circular(5.0),
-                                      borderSide: new BorderSide()),
-                                  hintText: 'Contact Number',
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10.0),
-                            ),
-                            Container(
-                              child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                onSaved: (input) =>
-                                    requestModel.password = input!,
-                                validator: (input) => input!.length < 3
-                                    ? "Password should be more than 3 characters"
-                                    : null,
-                                obscureText: hidePassword,
-                                decoration: InputDecoration(
-                                    prefixIcon: Icon(Icons.vpn_key_sharp),
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            hidePassword = !hidePassword;
-                                          });
-                                        },
-                                        icon: Icon(hidePassword
-                                            ? Icons.visibility_off
-                                            : Icons.visibility)),
-                                    border: new OutlineInputBorder(
+                                      borderSide: new BorderSide(),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
                                         borderRadius:
                                             new BorderRadius.circular(5.0),
-                                        borderSide: new BorderSide()),
-                                    hintText: 'Password'),
+                                        borderSide: new BorderSide(
+                                            color:
+                                                Colors.white.withOpacity(.9))),
+                                    enabledBorder: new OutlineInputBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(5.0),
+                                        borderSide: new BorderSide(
+                                            color:
+                                                Colors.white.withOpacity(.6))),
+                                    hintText: 'Contact Number',
+                                    hintStyle: TextStyle(
+                                      color: Colors.white.withOpacity(.6),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(5.0),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: <Widget>[
-                                RaisedButton(
-                                  child: Text("Log in"),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  color: Theme.of(context).primaryColor,
-                                  onPressed: () {
-                                    if (validateAndSave()) {
-                                      // setState(() {
-                                      //
-                                      // });
-                                      APIService apiService = new APIService();
-                                      apiService
-                                          .login(requestModel)
-                                          .then((value) {
-                                        // setState(() {
-                                        //   isApiCallProcess = false;
-                                        // });
-                                        if (value.token.isNotEmpty) {
-                                          final snackbar = SnackBar(
-                                            content: Text('Log in Successful'),
-                                          );
-                                          scaffoldKey.currentState!
-                                              .showSnackBar(snackbar);
-                                          RouteGenerator.navigateTo(
-                                              LandingPage.routeName);
-                                          print(value.token);
-                                          print(value.driver);
-                                        } else {
-                                          final snackbar = SnackBar(
-                                            content: Text('User not found'),
-                                          );
-                                          scaffoldKey.currentState!
-                                              .showSnackBar(snackbar);
+                              Padding(
+                                padding: EdgeInsets.all(10.0),
+                              ),
+                              Container(
+                                child: TextFormField(
+                                  cursorColor: Colors.white,
+                                  keyboardType: TextInputType.text,
+                                  onSaved: (input) =>
+                                      requestModel.password = input!,
+                                  validator: (input) => input!.length < 3
+                                      ? "Password should be more than 3 characters"
+                                      : null,
+                                  obscureText: hidePassword,
+                                  decoration: InputDecoration(
+                                      prefixIcon: Icon(
+                                        Icons.vpn_key_sharp,
+                                        color: Colors.white.withOpacity(.6),
+                                      ),
+                                      suffixIcon: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              hidePassword = !hidePassword;
+                                            });
+                                          },
+                                          icon: Icon(
+                                              hidePassword
+                                                  ? Icons.visibility_off
+                                                  : Icons.visibility,
+                                              color: Colors.white
+                                                  .withOpacity(.6))),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(5.0),
+                                          borderSide: new BorderSide(
+                                              color: Colors.white
+                                                  .withOpacity(.9))),
+                                      enabledBorder: new OutlineInputBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(5.0),
+                                          borderSide: new BorderSide(
+                                              color: Colors.white
+                                                  .withOpacity(.6))),
+                                      hintText: 'Password',
+                                      hintStyle: TextStyle(
+                                          color: Colors.white.withOpacity(.6))),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(5.0),
+                              ),
+                              SizedBox(
+                                height: 120,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: <Widget>[
+                                  Container(
+                                    height: 50,
+                                    child: RaisedButton(
+                                      child: Text(
+                                        "Log in",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      color: Theme.of(context).primaryColor,
+                                      onPressed: () {
+                                        if (validateAndSave()) {
+                                          // setState(() {
+                                          //
+                                          // });
+                                          APIService apiService =
+                                              new APIService();
+                                          apiService
+                                              .login(requestModel)
+                                              .then((value) {
+                                            // setState(() {
+                                            //   isApiCallProcess = false;
+                                            // });
+                                            if (value.token.isNotEmpty) {
+                                              final snackbar = SnackBar(
+                                                content:
+                                                    Text('Log in Successful'),
+                                              );
+                                              scaffoldKey.currentState!
+                                                  .showSnackBar(snackbar);
+                                              RouteGenerator.navigateTo(
+                                                  LandingPage.routeName);
+                                              print(value.token);
+                                              print(value.driver);
+                                            } else {
+                                              final snackbar = SnackBar(
+                                                content: Text('User not found'),
+                                              );
+                                              scaffoldKey.currentState!
+                                                  .showSnackBar(snackbar);
+                                            }
+                                          });
+                                          print(requestModel.toJson());
                                         }
-                                      });
-                                      print(requestModel.toJson());
-                                    }
-                                  },
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text("Not yet registered?"),
-                                TextButton(
-                                  //textColor: Colors.black,
-                                  child: Text(
-                                    "Sign Up",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  onPressed: () {},
-                                )
-                              ],
-                            ),
-                          ],
-                        )),
-                  ),
-                ],
+                                      },
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text("Not yet registered?"),
+                                  TextButton(
+                                    //textColor: Colors.black,
+                                    child: Text(
+                                      "Sign Up",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    onPressed: () {},
+                                  )
+                                ],
+                              ),
+                            ],
+                          )),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
