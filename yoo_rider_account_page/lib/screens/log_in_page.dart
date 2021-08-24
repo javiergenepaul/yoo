@@ -73,6 +73,7 @@ class _LogInPageState extends State<LogInPage> {
                             children: <Widget>[
                               Container(
                                 child: TextFormField(
+                                  cursorColor: Colors.white,
                                   keyboardType: TextInputType.number,
                                   onSaved: (input) =>
                                       requestModel.mobileNumber = input!,
@@ -198,7 +199,11 @@ class _LogInPageState extends State<LogInPage> {
                                               RouteGenerator.navigateTo(
                                                   LandingPage.routeName);
                                               print(value.token);
-                                              print(value.driver);
+                                              print(value.driver.name);
+                                              print(value.driver.email);
+                                              print(value.driver.city);
+                                              print(value.driver.vehicleType);
+                                              print(value.driver.dateOfBirth);
                                             } else {
                                               final snackbar = SnackBar(
                                                 content: Text('User not found'),

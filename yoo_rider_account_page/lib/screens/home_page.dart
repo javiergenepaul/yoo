@@ -6,6 +6,7 @@ import 'package:yoo_rider_account_page/routes/route_generator.dart';
 import 'package:yoo_rider_account_page/screens/order_navigation_page.dart';
 import 'package:yoo_rider_account_page/screens/profile_and_security_page.dart';
 import 'package:yoo_rider_account_page/widgets/add_ons_widget.dart';
+import 'package:yoo_rider_account_page/widgets/style_theme.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -22,7 +23,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Active Orders"),
+        title: Text(
+          "Active Orders",
+          style: appBarStyle,
+        ),
       ),
       body: Scrollbar(
         child: ListView.builder(
@@ -115,14 +119,16 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text("Active Order Details"),
         ),
-        body: Container(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
-          child: Column(
-            children: <Widget>[
-              Header(active, context),
-              SizedBox(height: 8.0),
-              BodyDetails(active, context),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            child: Column(
+              children: <Widget>[
+                Header(active, context),
+                SizedBox(height: 8.0),
+                BodyDetails(active, context),
+              ],
+            ),
           ),
         ));
   }
@@ -145,7 +151,7 @@ class _HomePageState extends State<HomePage> {
             Text(
               "Transaction ID ",
               style: TextStyle(
-                color: Theme.of(context).accentColor,
+                color: primaryColor,
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -157,7 +163,7 @@ class _HomePageState extends State<HomePage> {
             Spacer(),
             Icon(
               Icons.money,
-              color: Theme.of(context).accentColor,
+              color: primaryColor,
               size: 30.0,
             ),
             Text(
@@ -182,6 +188,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget BodyDetails(Active active, context) {
     return Container(
+      padding: const EdgeInsets.all(8.0),
       // height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -193,25 +200,23 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            //delivery Details
-            DeliveryDetails(context, active.Pickup, active.DropOff),
-            //Schedule Details
-            ScheduleDetails(context, active.Schedule, time, active.Vehicle),
-            //Add ons Details
-            AddOnsDetails(context),
-            //payment details
-            PaymentDetails(context),
-            //total payment details
-            TotalPaymentDetails(context, active.Rate),
-            //TODO:
-            takeOrderButton(),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          //delivery Details
+          DeliveryDetails(context, active.Pickup, active.DropOff),
+          //Schedule Details
+          ScheduleDetails(context, active.Schedule, time, active.Vehicle),
+          //Add ons Details
+          AddOnsDetails(context),
+          //payment details
+          PaymentDetails(context),
+          //total payment details
+          TotalPaymentDetails(context, active.Rate),
+          //TODO:
+          UserRemarks(context, active.Remarks),
+          takeOrderButton(),
+        ],
       ),
     );
   }
@@ -234,7 +239,7 @@ class _HomePageState extends State<HomePage> {
             Text(
               "Delivery Details",
               style: TextStyle(
-                  color: Theme.of(context).accentColor,
+                  color: primaryColor,
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold),
             ),
@@ -246,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Icon(
                         Icons.circle_outlined,
-                        color: Theme.of(context).accentColor,
+                        color: primaryColor,
                       ),
                       Text(
                         "   " + pickup,
@@ -258,7 +263,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Icon(
                         Icons.circle_outlined,
-                        color: Theme.of(context).accentColor,
+                        color: primaryColor,
                       ),
                       Text(
                         "   " + dropOff,
@@ -270,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Icon(
                         Icons.circle_outlined,
-                        color: Theme.of(context).accentColor,
+                        color: primaryColor,
                       ),
                       Text(
                         "   " + dropOff,
@@ -305,7 +310,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Icon(
                   Icons.calendar_today_rounded,
-                  color: Theme.of(context).accentColor,
+                  color: primaryColor,
                 ),
                 Text("  Pick Up Schedule - ${schedule} ${time}",
                     style: TextStyle(color: Colors.black38, fontSize: 15)),
@@ -313,8 +318,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Row(
               children: <Widget>[
-                Icon(Icons.directions_car_filled,
-                    color: Theme.of(context).accentColor),
+                Icon(Icons.directions_car_filled, color: primaryColor),
                 Text("  ${vehicle}",
                     style: TextStyle(color: Colors.black38, fontSize: 15)),
               ],
@@ -346,7 +350,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).accentColor),
+                      color: primaryColor),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -361,7 +365,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Row(
               children: <Widget>[
-                Icon(Icons.check_box, color: Theme.of(context).accentColor),
+                Icon(Icons.check_box, color: primaryColor),
                 Text("  Favourite Driver first",
                     style: TextStyle(color: Colors.black38, fontSize: 15)),
               ],
@@ -389,14 +393,14 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Text("Payment Details",
                 style: TextStyle(
-                    color: Theme.of(context).accentColor,
+                    color: primaryColor,
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold)),
             Row(
               children: [
                 Icon(
                   Icons.money,
-                  color: Theme.of(context).accentColor,
+                  color: primaryColor,
                   size: 30.0,
                 ),
                 Text(" Recipient",
@@ -407,7 +411,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Icon(
                   Icons.price_change_rounded,
-                  color: Theme.of(context).accentColor,
+                  color: primaryColor,
                   size: 30.0,
                 ),
                 Text(" Voucher",
@@ -488,6 +492,45 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget UserRemarks(context, remarks) {
+    return Container(
+      height: MediaQuery.of(context).size.height * .25,
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(0.0, 0.0),
+          )
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Remarks',
+            style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.w800, color: primaryColor),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            padding: EdgeInsets.all(10),
+            height: MediaQuery.of(context).size.height * .15,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              border: Border.all(),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text('$remarks'),
+          ),
+        ],
+      ),
+    );
+  }
+
   //Button
   Widget takeOrderButton() {
     return Container(
@@ -495,12 +538,15 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           RaisedButton(
-              child: Text('Take Order'),
+              child: Text(
+                'Take Order',
+                style: TextStyle(color: Colors.white),
+              ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
               padding: const EdgeInsets.all(10),
-              color: Theme.of(context).primaryColor,
+              color: primaryColor,
               onPressed: () {
                 RouteGenerator.navigateTo(OrderNavigation.routeName);
               }),

@@ -19,6 +19,7 @@ class Active {
   final String Vehicle;
   final double Rate;
   final bool State;
+  final String Remarks;
 
   Active({
     required this.TransactionID,
@@ -29,6 +30,7 @@ class Active {
     required this.Vehicle,
     required this.Rate,
     required this.State,
+    required this.Remarks,
   });
 }
 

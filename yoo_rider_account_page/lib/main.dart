@@ -10,6 +10,7 @@ import 'package:yoo_rider_account_page/screens/notifications_page.dart';
 import 'package:yoo_rider_account_page/screens/profile_and_security_page.dart';
 import 'package:yoo_rider_account_page/screens/rider_account_page.dart';
 import 'package:yoo_rider_account_page/screens/rider_income_summary_page.dart';
+import 'package:yoo_rider_account_page/widgets/style_theme.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

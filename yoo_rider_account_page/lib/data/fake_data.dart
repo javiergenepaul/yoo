@@ -43,7 +43,9 @@ final List<Active> sampleActiveOrder = [
       DropOff: "DropOff",
       Vehicle: "Vehicle",
       Rate: 170.00,
-      State: true),
+      State: true,
+      Remarks:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"),
   Active(
       TransactionID: "123-456789",
       Schedule: "07/07/21",
@@ -52,7 +54,8 @@ final List<Active> sampleActiveOrder = [
       DropOff: "DropOff",
       Vehicle: "Vehicle",
       Rate: 170.00,
-      State: true),
+      State: true,
+      Remarks: "This is a remark message From User"),
   Active(
       TransactionID: "123-456789",
       Schedule: "07/07/21",
@@ -61,7 +64,8 @@ final List<Active> sampleActiveOrder = [
       DropOff: "DropOff",
       Vehicle: "Vehicle",
       Rate: 170.00,
-      State: true),
+      State: true,
+      Remarks: "This is a remark message From User"),
 ];
 
 final List<Cancelled> sampleCancelledOrder = [
