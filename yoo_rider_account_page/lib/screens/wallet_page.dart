@@ -10,6 +10,7 @@ class _WalletPageState extends State<WalletPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('My Wallet'),
       ),
       body: Center(

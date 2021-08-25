@@ -195,7 +195,7 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
               setState(() {});
             },
           ),
-          Icon(Icons.arrow_forward_ios_outlined),
+          Icon(Icons.keyboard_arrow_right_sharp),
         ],
       ),
     );
@@ -224,7 +224,7 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      trailing: Icon(Icons.arrow_forward_ios_outlined),
+      trailing: Icon(Icons.keyboard_arrow_right_sharp),
       onTap: () => RouteGenerator.navigateTo(HelpCentre.routeName),
     );
   }
@@ -238,7 +238,7 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      trailing: Icon(Icons.arrow_forward_ios_outlined),
+      trailing: Icon(Icons.keyboard_arrow_right_sharp),
       onTap: () => RouteGenerator.navigateTo(NotificationsPage.routeName),
     );
   }
@@ -252,7 +252,7 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      trailing: Icon(Icons.arrow_forward_ios_outlined),
+      trailing: Icon(Icons.keyboard_arrow_right_sharp),
       onTap: () => null,
     );
   }

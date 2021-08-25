@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   final List<Active?> actives = sampleActiveOrder;
   var date;
   var time;
+  bool value = true;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,9 @@ class _HomePageState extends State<HomePage> {
           "Active Orders",
           style: appBarStyle,
         ),
+        automaticallyImplyLeading: false,
       ),
+      // drawer: DrawerSample(),
       body: Scrollbar(
         child: ListView.builder(
           padding: EdgeInsets.all(8.0),

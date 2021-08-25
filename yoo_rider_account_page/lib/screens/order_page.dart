@@ -10,6 +10,7 @@ class OrderPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text('My Order'),
           bottom: TabBar(
             tabs: <Widget>[

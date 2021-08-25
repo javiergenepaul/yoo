@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yoo_rider_account_page/models/notification_model.dart';
 import 'package:yoo_rider_account_page/models/order_model.dart';
+import 'package:yoo_rider_account_page/models/rider_login_model.dart';
 import 'package:yoo_rider_account_page/models/sample_user_rider_model.dart';
 
 var ordermodel = [

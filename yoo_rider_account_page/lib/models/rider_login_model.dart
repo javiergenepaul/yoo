@@ -28,6 +28,40 @@ class LoginResponseModel {
 }
 
 class Driver {
+  int id;
+  String name;
+  String email;
+  dynamic emailVerifiedAt;
+  String city;
+  String vehicleType;
+  DateTime dateOfBirth;
+  String drivingLicenseNumber;
+  DateTime drivingLicenseExpiry;
+  String driverLicenseImage;
+  String vehicleBrand;
+  String vehicleModel;
+  String vehicleManufactureYear;
+  String licensePlateNumber;
+  dynamic trainingCompleted;
+  String nbiClearance;
+  String portrait;
+  dynamic deedOfSale;
+  String vehicleRegistration;
+  String vehicleFront;
+  String vehicleSide;
+  String vehicleBack;
+  String password;
+  dynamic status;
+  dynamic orderStatus;
+  dynamic orderGoalsPerDay;
+  dynamic incomeGoalsPerDay;
+  dynamic promptForTarget;
+  dynamic rating;
+  dynamic numberOfFans;
+  DateTime createdAt;
+  DateTime updatedAt;
+  dynamic verificationStatusId;
+
   Driver({
     required this.id,
     required this.name,
@@ -63,40 +97,6 @@ class Driver {
     required this.updatedAt,
     this.verificationStatusId,
   });
-
-  int id;
-  String name;
-  String email;
-  dynamic emailVerifiedAt;
-  String city;
-  String vehicleType;
-  DateTime dateOfBirth;
-  String drivingLicenseNumber;
-  DateTime drivingLicenseExpiry;
-  String driverLicenseImage;
-  String vehicleBrand;
-  String vehicleModel;
-  String vehicleManufactureYear;
-  String licensePlateNumber;
-  dynamic trainingCompleted;
-  String nbiClearance;
-  String portrait;
-  dynamic deedOfSale;
-  String vehicleRegistration;
-  String vehicleFront;
-  String vehicleSide;
-  String vehicleBack;
-  String password;
-  dynamic status;
-  dynamic orderStatus;
-  dynamic orderGoalsPerDay;
-  dynamic incomeGoalsPerDay;
-  dynamic promptForTarget;
-  dynamic rating;
-  dynamic numberOfFans;
-  DateTime createdAt;
-  DateTime updatedAt;
-  dynamic verificationStatusId;
 
   factory Driver.fromJson(Map<String, dynamic> json) => Driver(
         id: json["id"],

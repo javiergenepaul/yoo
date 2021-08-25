@@ -17,6 +17,8 @@ class _LogInPageState extends State<LogInPage> {
   bool hidePassword = true;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
+
+  APIService apiService = new APIService();
   bool validateAndSave() {
     final form = globalFormKey.currentState;
     if (form!.validate()) {
@@ -181,8 +183,6 @@ class _LogInPageState extends State<LogInPage> {
                                           // setState(() {
                                           //
                                           // });
-                                          APIService apiService =
-                                              new APIService();
                                           apiService
                                               .login(requestModel)
                                               .then((value) {
@@ -204,6 +204,8 @@ class _LogInPageState extends State<LogInPage> {
                                               print(value.driver.city);
                                               print(value.driver.vehicleType);
                                               print(value.driver.dateOfBirth);
+                                              print(value.driver.numberOfFans);
+                                              print(requestModel.mobileNumber);
                                             } else {
                                               final snackbar = SnackBar(
                                                 content: Text('User not found'),

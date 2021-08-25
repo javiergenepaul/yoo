@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/screens/home_page.dart';
 import 'package:yoo_rider_account_page/screens/notifications_page.dart';
@@ -43,12 +44,82 @@ class _HomePageState extends State<LandingPage> {
     RiderAccountPage(),
   ];
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return CupertinoTabScaffold(
+  //       tabBar: CupertinoTabBar(
+  //         items: [
+  //           BottomNavigationBarItem(
+  //               icon: Icon(Icons.home_outlined),
+  //               title: Text("Home"),
+  //               backgroundColor: Colors.blue),
+  //           BottomNavigationBarItem(
+  //               icon: Icon(Icons.add_shopping_cart),
+  //               title: Text("Order"),
+  //               backgroundColor: Colors.blue),
+  //           BottomNavigationBarItem(
+  //               icon: Icon(Icons.account_balance_wallet_outlined),
+  //               title: Text("Wallet"),
+  //               backgroundColor: Colors.blue),
+  //           BottomNavigationBarItem(
+  //               icon: Icon(Icons.circle_notifications_outlined),
+  //               title: Text("Notifications"),
+  //               backgroundColor: Colors.blue),
+  //           BottomNavigationBarItem(
+  //               icon: Icon(Icons.person_outline_outlined),
+  //               title: Text("Profile"),
+  //               backgroundColor: Colors.blue),
+  //         ],
+  //       ),
+  //       tabBuilder: (context, index) {
+  //         switch (index) {
+  //           case 0:
+  //             return CupertinoTabView(
+  //               builder: (context) {
+  //                 return CupertinoPageScaffold(child: HomePage());
+  //               },
+  //             );
+  //           case 1:
+  //             return CupertinoTabView(
+  //               builder: (context) {
+  //                 return CupertinoPageScaffold(child: OrderPage());
+  //               },
+  //             );
+  //           case 2:
+  //             return CupertinoTabView(
+  //               builder: (context) {
+  //                 return CupertinoPageScaffold(child: WalletPage());
+  //               },
+  //             );
+  //           case 3:
+  //             return CupertinoTabView(
+  //               builder: (context) {
+  //                 return CupertinoPageScaffold(child: NotificationsPage());
+  //               },
+  //             );
+  //           case 4:
+  //             return CupertinoTabView(
+  //               builder: (context) {
+  //                 return CupertinoPageScaffold(child: RiderAccountPage());
+  //               },
+  //             );
+  //           default:
+  //             return CupertinoTabView(
+  //               builder: (context) {
+  //                 return CupertinoPageScaffold(child: HomePage());
+  //               },
+  //             );
+  //         }
+  //       });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
       //   title: AppBarTitle[_currentIndex],
       // ),
+      // drawer: DrawerSample(),
       body: PageTransitionSwitcher(
         transitionBuilder: (child, primaryAnimation, secondaryAnimation) =>
             FadeThroughTransition(
