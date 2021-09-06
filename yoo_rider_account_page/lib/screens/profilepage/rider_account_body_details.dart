@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/data/fake_data.dart';
 import 'package:yoo_rider_account_page/models/sample_user_rider_model.dart';
 import 'package:yoo_rider_account_page/routes/route_generator.dart';
-import 'package:yoo_rider_account_page/screens/help_centre_page.dart';
-import 'package:yoo_rider_account_page/screens/notifications_page.dart';
-import 'package:yoo_rider_account_page/screens/profile_and_security_page.dart';
-import 'package:yoo_rider_account_page/screens/rider_income_summary_page.dart';
+import 'package:yoo_rider_account_page/screens/notifpage/notification_settings_page.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/help_centre_page.dart';
+import 'package:yoo_rider_account_page/screens/notifpage/notifications_page.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/profile_and_security_page.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/rider_income_summary_page.dart';
 import 'package:yoo_rider_account_page/widgets/profile_widgets.dart';
-import 'package:yoo_rider_account_page/widgets/style_theme.dart';
+import 'package:yoo_rider_account_page/constants/style_theme.dart';
 
 class AccountBodyDetails extends StatefulWidget {
   @override
@@ -195,7 +196,7 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
               setState(() {});
             },
           ),
-          Icon(Icons.keyboard_arrow_right_sharp),
+          Icon(Icons.navigate_next),
         ],
       ),
     );
@@ -210,7 +211,7 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      trailing: Icon(Icons.keyboard_arrow_right_sharp),
+      trailing: Icon(Icons.navigate_next),
       onTap: () => RouteGenerator.navigateTo(RiderIncomeSummary.routeName),
     );
   }
@@ -224,7 +225,7 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      trailing: Icon(Icons.keyboard_arrow_right_sharp),
+      trailing: Icon(Icons.navigate_next),
       onTap: () => RouteGenerator.navigateTo(HelpCentre.routeName),
     );
   }
@@ -238,8 +239,8 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      trailing: Icon(Icons.keyboard_arrow_right_sharp),
-      onTap: () => RouteGenerator.navigateTo(NotificationsPage.routeName),
+      trailing: Icon(Icons.navigate_next),
+      onTap: () => RouteGenerator.navigateTo(NotificationSettings.routeName),
     );
   }
 
@@ -252,7 +253,7 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      trailing: Icon(Icons.keyboard_arrow_right_sharp),
+      trailing: Icon(Icons.navigate_next),
       onTap: () => null,
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/content/profile_and_security_body_details.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/profile_and_security_body_details.dart';
 
 class ProfileSecurity extends StatelessWidget {
   static const String routeName = '/profile';

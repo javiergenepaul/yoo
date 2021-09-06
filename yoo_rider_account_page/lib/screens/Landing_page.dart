@@ -1,11 +1,12 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/screens/home_page.dart';
-import 'package:yoo_rider_account_page/screens/notifications_page.dart';
-import 'package:yoo_rider_account_page/screens/order_page.dart';
-import 'package:yoo_rider_account_page/screens/rider_account_page.dart';
-import 'package:yoo_rider_account_page/screens/wallet_page.dart';
+import 'package:yoo_rider_account_page/screens/homepage/take_orders_page.dart';
+import 'package:yoo_rider_account_page/screens/notifpage/notifications_page.dart';
+import 'package:yoo_rider_account_page/screens/orderspage/order_page.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/rider_account_page.dart';
+import 'package:yoo_rider_account_page/screens/walletpage/wallet_page.dart';
+import 'package:yoo_rider_account_page/widgets/drawer_widget.dart';
 
 class LandingPage extends StatefulWidget {
   static const String routeName = '/homepage';
@@ -119,7 +120,6 @@ class _HomePageState extends State<LandingPage> {
       // appBar: AppBar(
       //   title: AppBarTitle[_currentIndex],
       // ),
-      // drawer: DrawerSample(),
       body: PageTransitionSwitcher(
         transitionBuilder: (child, primaryAnimation, secondaryAnimation) =>
             FadeThroughTransition(
@@ -145,24 +145,39 @@ class _HomePageState extends State<LandingPage> {
           //iconSize: 30,
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                title: Text("Home"),
+                icon: Icon(Icons.moving),
+                title: Text(
+                  "Take Orders",
+                  style: TextStyle(fontSize: 12),
+                ),
                 backgroundColor: Colors.blue),
             BottomNavigationBarItem(
                 icon: Icon(Icons.add_shopping_cart),
-                title: Text("Order"),
+                title: Text(
+                  "Order",
+                  style: TextStyle(fontSize: 12),
+                ),
                 backgroundColor: Colors.blue),
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_balance_wallet_outlined),
-                title: Text("Wallet"),
+                title: Text(
+                  "Wallet",
+                  style: TextStyle(fontSize: 12),
+                ),
                 backgroundColor: Colors.blue),
             BottomNavigationBarItem(
                 icon: Icon(Icons.circle_notifications_outlined),
-                title: Text("Notifications"),
+                title: Text(
+                  "Notifications",
+                  style: TextStyle(fontSize: 12),
+                ),
                 backgroundColor: Colors.blue),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline_outlined),
-                title: Text("Profile"),
+                title: Text(
+                  "Profile",
+                  style: TextStyle(fontSize: 12),
+                ),
                 backgroundColor: Colors.blue),
           ],
         ),

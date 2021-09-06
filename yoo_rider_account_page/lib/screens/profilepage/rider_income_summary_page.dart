@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/content/daily_income_summary_details.dart';
-import 'package:yoo_rider_account_page/content/monthly_income_summary_details.dart';
-import 'package:yoo_rider_account_page/content/weekly_income_summary_details.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/daily_income_summary_details.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/monthly_income_summary_details.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/weekly_income_summary_details.dart';
 import 'package:yoo_rider_account_page/widgets/daily_bar_widget.dart';
 import 'package:yoo_rider_account_page/widgets/monthly_bar_widget.dart';
 import 'package:yoo_rider_account_page/widgets/weekly_bar_widget.dart';

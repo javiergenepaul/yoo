@@ -4,6 +4,7 @@ import 'package:yoo_rider_account_page/models/notification_model.dart';
 import 'package:yoo_rider_account_page/models/order_model.dart';
 import 'package:yoo_rider_account_page/models/rider_login_model.dart';
 import 'package:yoo_rider_account_page/models/sample_user_rider_model.dart';
+import 'package:yoo_rider_account_page/models/wallet_models.dart';
 
 var ordermodel = [
   OrderModel(
@@ -38,12 +39,12 @@ var ordermodel = [
 final List<Active> sampleActiveOrder = [
   Active(
       TransactionID: "123-456789",
-      Schedule: "07/07/21",
+      Schedule: "07/21/21",
       Time: "2:30",
-      Pickup: "PickUp",
-      DropOff: "DropOff",
-      Vehicle: "Vehicle",
-      Rate: 170.00,
+      Pickup: "Tungkop Minglanilla, Cebu",
+      DropOff: "Colon Naga City, Cebu",
+      Vehicle: "Motorcycle",
+      Rate: 320.00,
       State: true,
       Remarks:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"),
@@ -169,6 +170,34 @@ final List<NotificationModel> sampleNotif = [
       title: 'Notification',
       subtitle: 'Notification Subject',
       message: 'Notification Message'),
+];
+
+final List<WalletModel> sampleWallet = [
+  WalletModel(
+    title: 'Cash out',
+    subtitle: 'To BPI',
+    trailing: 'Php 1000.00',
+  ),
+  WalletModel(
+    title: 'Delivery',
+    subtitle: 'Transaction ID',
+    trailing: 'Php 1000.00',
+  ),
+  WalletModel(
+    title: 'Cash in',
+    subtitle: 'Gcash',
+    trailing: 'Php 500.00',
+  ),
+  WalletModel(
+    title: 'Cash out',
+    subtitle: 'To BPI',
+    trailing: 'Php 700.00',
+  ),
+  WalletModel(
+    title: 'Cash out',
+    subtitle: 'To BPI',
+    trailing: 'Php 300.00',
+  ),
 ];
 
 class UserPreferences {

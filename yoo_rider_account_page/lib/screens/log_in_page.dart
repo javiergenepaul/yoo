@@ -1,10 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/models/rider_login_model.dart';
 import 'package:yoo_rider_account_page/routes/route_generator.dart';
 import 'package:yoo_rider_account_page/screens/Landing_page.dart';
-import 'package:yoo_rider_account_page/screens/home_page.dart';
-import 'package:yoo_rider_account_page/screens/rider_account_page.dart';
+import 'package:yoo_rider_account_page/screens/homepage/take_orders_page.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/rider_account_page.dart';
 import 'package:yoo_rider_account_page/services/rider_login_api_service.dart';
+import 'package:yoo_rider_account_page/constants/style_theme.dart';
 
 class LogInPage extends StatefulWidget {
   static const String routeName = '/loginpage';
@@ -17,7 +20,6 @@ class _LogInPageState extends State<LogInPage> {
   bool hidePassword = true;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
-
   APIService apiService = new APIService();
   bool validateAndSave() {
     final form = globalFormKey.currentState;
@@ -30,7 +32,6 @@ class _LogInPageState extends State<LogInPage> {
 
   //TODO: add Controllers for Inputs
   //TODO: add Loading Indicator
-
   late LoginRequestModel requestModel;
 
   @override
@@ -77,6 +78,7 @@ class _LogInPageState extends State<LogInPage> {
                                 child: TextFormField(
                                   cursorColor: Colors.white,
                                   keyboardType: TextInputType.number,
+                                  style: TextStyle(color: Colors.white),
                                   onSaved: (input) =>
                                       requestModel.mobileNumber = input!,
                                   validator: (input) => input!.length <= 10
@@ -84,8 +86,8 @@ class _LogInPageState extends State<LogInPage> {
                                       : null,
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(
-                                      Icons.mail,
-                                      color: Colors.white.withOpacity(.6),
+                                      Icons.phone_android,
+                                      color: Colors.white70,
                                     ),
                                     border: new OutlineInputBorder(
                                       borderRadius:
@@ -104,9 +106,9 @@ class _LogInPageState extends State<LogInPage> {
                                         borderSide: new BorderSide(
                                             color:
                                                 Colors.white.withOpacity(.6))),
-                                    hintText: 'Contact Number',
+                                    hintText: 'Phone Number',
                                     hintStyle: TextStyle(
-                                      color: Colors.white.withOpacity(.6),
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -118,6 +120,7 @@ class _LogInPageState extends State<LogInPage> {
                                 child: TextFormField(
                                   cursorColor: Colors.white,
                                   keyboardType: TextInputType.text,
+                                  style: TextStyle(color: Colors.white),
                                   onSaved: (input) =>
                                       requestModel.password = input!,
                                   validator: (input) => input!.length < 3
@@ -126,8 +129,8 @@ class _LogInPageState extends State<LogInPage> {
                                   obscureText: hidePassword,
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(
-                                        Icons.vpn_key_sharp,
-                                        color: Colors.white.withOpacity(.6),
+                                        Icons.lock,
+                                        color: Colors.white70,
                                       ),
                                       suffixIcon: IconButton(
                                           onPressed: () {
@@ -141,6 +144,11 @@ class _LogInPageState extends State<LogInPage> {
                                                   : Icons.visibility,
                                               color: Colors.white
                                                   .withOpacity(.6))),
+                                      border: new OutlineInputBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(5.0),
+                                        borderSide: new BorderSide(),
+                                      ),
                                       focusedBorder: OutlineInputBorder(
                                           borderRadius:
                                               new BorderRadius.circular(5.0),
@@ -154,8 +162,8 @@ class _LogInPageState extends State<LogInPage> {
                                               color: Colors.white
                                                   .withOpacity(.6))),
                                       hintText: 'Password',
-                                      hintStyle: TextStyle(
-                                          color: Colors.white.withOpacity(.6))),
+                                      hintStyle:
+                                          TextStyle(color: Colors.white)),
                                 ),
                               ),
                               Padding(
@@ -175,9 +183,9 @@ class _LogInPageState extends State<LogInPage> {
                                         style: TextStyle(color: Colors.white),
                                       ),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                      color: Theme.of(context).primaryColor,
+                                      color: tertiaryColor,
                                       onPressed: () {
                                         if (validateAndSave()) {
                                           // setState(() {
@@ -205,7 +213,6 @@ class _LogInPageState extends State<LogInPage> {
                                               print(value.driver.vehicleType);
                                               print(value.driver.dateOfBirth);
                                               print(value.driver.numberOfFans);
-                                              print(requestModel.mobileNumber);
                                             } else {
                                               final snackbar = SnackBar(
                                                 content: Text('User not found'),
@@ -215,6 +222,8 @@ class _LogInPageState extends State<LogInPage> {
                                             }
                                           });
                                           print(requestModel.toJson());
+                                          print(requestModel.mobileNumber);
+                                          print(requestModel.password);
                                         }
                                       },
                                     ),
@@ -224,13 +233,22 @@ class _LogInPageState extends State<LogInPage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Text("Not yet registered?"),
+                                  Text("Don't have an account yet?",
+                                      style: fontWhite),
                                   TextButton(
                                     //textColor: Colors.black,
                                     child: Text(
-                                      "Sign Up",
+                                      "Register",
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          shadows: [
+                                            Shadow(
+                                              offset: Offset(0, 0),
+                                              blurRadius: 5.0,
+                                              color: Color(0xFFFFFFFF),
+                                            ),
+                                          ]),
                                     ),
                                     onPressed: () {},
                                   )

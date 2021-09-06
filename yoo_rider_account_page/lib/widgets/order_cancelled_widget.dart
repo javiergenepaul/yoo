@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/data/enum.dart';
 import 'package:yoo_rider_account_page/data/fake_data.dart';
 import 'package:yoo_rider_account_page/models/order_model.dart';
-import 'package:yoo_rider_account_page/screens/order_details_page.dart';
+import 'package:yoo_rider_account_page/screens/orderspage/order_details_page.dart';
 
 class OrderCancelledWidget extends StatelessWidget {
-  final List<Cancelled?> cancelleds = sampleCancelledOrder;
+  // final List<Cancelled?> cancelleds = sampleCancelledOrder;
   @override
   Widget build(BuildContext context) {
     return Container();

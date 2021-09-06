@@ -1,5 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.yoo_rider_account_page">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    
    <application
         android:label="yoo_rider_account_page"
         android:icon="@mipmap/ic_launcher">
@@ -37,8 +42,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC-SoDyK20J4IvpdNgk9085wLdns-Zowqs" />
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyC-SoDyK20J4IvpdNgk9085wLdns-Zowqs"/>
     </application>
 </manifest>

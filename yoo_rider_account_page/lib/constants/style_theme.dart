@@ -15,7 +15,16 @@ const appBarStyle = TextStyle(
   color: Colors.white,
 );
 
+const TextStyle header1 =
+    TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.bold);
+const TextStyle header2 =
+    TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.w900);
+const TextStyle header3 =
+    TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600);
+
 // const headline1 = TextStyle(
 //   fontSize: 25,
 //   fontWeight: FontWeight.bold,
 // );
+
+TextStyle fontWhite = TextStyle(color: Colors.white);

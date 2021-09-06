@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/screens/notification_settings_page.dart';
+import 'package:yoo_rider_account_page/screens/notifpage/notification_settings_page.dart';
+import 'package:yoo_rider_account_page/widgets/drawer_widget.dart';
 import 'package:yoo_rider_account_page/widgets/notification_widgets.dart';
-import 'package:yoo_rider_account_page/widgets/style_theme.dart';
+import 'package:yoo_rider_account_page/constants/style_theme.dart';
 
 class NotificationsPage extends StatelessWidget {
   static const routeName = '/notifications';
@@ -11,7 +12,6 @@ class NotificationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: Text('Notifications'),
         actions: [
           IconButton(
@@ -21,6 +21,7 @@ class NotificationsPage extends StatelessWidget {
               icon: Icon(Icons.settings)),
         ],
       ),
+      drawer: MainDrawer(),
       body: NotificationWidget(),
     );
   }

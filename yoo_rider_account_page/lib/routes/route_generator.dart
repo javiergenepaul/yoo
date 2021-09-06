@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/screens/Landing_page.dart';
-import 'package:yoo_rider_account_page/screens/help_centre_page.dart';
-import 'package:yoo_rider_account_page/screens/home_page.dart';
+import 'package:yoo_rider_account_page/screens/orderspage/order_page.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/help_centre_page.dart';
+import 'package:yoo_rider_account_page/screens/homepage/take_orders_page.dart';
 import 'package:yoo_rider_account_page/screens/log_in_page.dart';
-import 'package:yoo_rider_account_page/screens/notification_settings_page.dart';
-import 'package:yoo_rider_account_page/screens/notifications_page.dart';
-import 'package:yoo_rider_account_page/screens/order_navigation_page.dart';
-import 'package:yoo_rider_account_page/screens/profile_and_security_page.dart';
-import 'package:yoo_rider_account_page/screens/rider_account_page.dart';
-import 'package:yoo_rider_account_page/screens/rider_income_summary_page.dart';
+import 'package:yoo_rider_account_page/screens/notifpage/notification_settings_page.dart';
+import 'package:yoo_rider_account_page/screens/notifpage/notifications_page.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/profile_and_security_page.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/rider_account_page.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/rider_income_summary_page.dart';
+import 'package:yoo_rider_account_page/screens/walletpage/wallet_page.dart';
 
 class RouteGenerator {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -42,8 +43,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => NotificationSettings());
       case RiderIncomeSummary.routeName:
         return MaterialPageRoute(builder: (_) => RiderIncomeSummary());
-      case OrderNavigation.routeName:
-        return MaterialPageRoute(builder: (_) => OrderNavigation());
+      case WalletPage.routeName:
+        return MaterialPageRoute(builder: (_) => WalletPage());
+      case OrderPage.routeName:
+        return MaterialPageRoute(builder: (_) => OrderPage());
 
       default:
         return _noPageFound();

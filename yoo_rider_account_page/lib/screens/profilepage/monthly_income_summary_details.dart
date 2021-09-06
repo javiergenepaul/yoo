@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/widgets/style_theme.dart';
+import 'package:yoo_rider_account_page/constants/style_theme.dart';
 
-class DailyIncomeSummary extends StatelessWidget {
+class MonthlyIncomeSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          SizedBox(
-            height: 10,
-          ),
           Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.all(15),
             child: Text(
-              'Daily Report',
+              'Monthly Report',
               style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
             ),
           ),
@@ -29,7 +26,7 @@ class DailyIncomeSummary extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Total Income Today:'),
+                Text('Total Income This Month:'),
                 Text('100000php'),
               ],
             ),
@@ -102,34 +99,34 @@ class DailyIncomeSummary extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget dailyIncomeExpand(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * .3,
-      height: MediaQuery.of(context).size.width * .3,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: active,
-          width: 3,
-        ),
+Widget monthlyIncomeExpand(BuildContext context) {
+  return Container(
+    width: MediaQuery.of(context).size.width * .3,
+    height: MediaQuery.of(context).size.width * .3,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      border: Border.all(
+        color: active,
+        width: 3,
       ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'PHP200',
-              style: TextStyle(
-                  color: active, fontWeight: FontWeight.w500, fontSize: 18),
-            ),
-            Text(
-              'Today',
-              style: TextStyle(fontSize: 13),
-            ),
-          ],
-        ),
+    ),
+    child: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'PHP8,000',
+            style: TextStyle(
+                color: active, fontWeight: FontWeight.w500, fontSize: 18),
+          ),
+          Text(
+            'This Month',
+            style: TextStyle(fontSize: 13),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }

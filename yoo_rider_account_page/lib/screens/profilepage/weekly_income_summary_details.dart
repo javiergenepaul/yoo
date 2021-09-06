@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yoo_rider_account_page/widgets/style_theme.dart';
+import 'package:yoo_rider_account_page/constants/style_theme.dart';
 
-class MonthlyIncomeSummary extends StatelessWidget {
+class WeeklyIncomeSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,7 +11,7 @@ class MonthlyIncomeSummary extends StatelessWidget {
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.all(15),
             child: Text(
-              'Monthly Report',
+              'Weekly Report',
               style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),
             ),
           ),
@@ -26,7 +26,7 @@ class MonthlyIncomeSummary extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Total Income This Month:'),
+                Text('Total Income This Week:'),
                 Text('100000php'),
               ],
             ),
@@ -101,7 +101,7 @@ class MonthlyIncomeSummary extends StatelessWidget {
   }
 }
 
-Widget monthlyIncomeExpand(BuildContext context) {
+Widget weeklyIncomeExpand(BuildContext context) {
   return Container(
     width: MediaQuery.of(context).size.width * .3,
     height: MediaQuery.of(context).size.width * .3,
@@ -117,12 +117,12 @@ Widget monthlyIncomeExpand(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'PHP8,000',
+            'PHP2000',
             style: TextStyle(
                 color: active, fontWeight: FontWeight.w500, fontSize: 18),
           ),
           Text(
-            'This Month',
+            'This Week',
             style: TextStyle(fontSize: 13),
           ),
         ],
