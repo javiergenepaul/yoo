@@ -10,8 +10,8 @@ class RiderAccountPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Account'),
+        automaticallyImplyLeading: false,
       ),
-      drawer: MainDrawer(),
       body: AccountBodyDetails(),
     );
   }

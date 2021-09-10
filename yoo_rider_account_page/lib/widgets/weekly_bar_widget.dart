@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/widgets/daily_bar_data.dart';
-import 'package:yoo_rider_account_page/widgets/weekly_bar_data.dart';
+import 'package:yoo_rider_account_page/data/weekly_bar_data.dart';
 
 class WeeklyBarChart extends StatelessWidget {
   final double barWidth = 30;

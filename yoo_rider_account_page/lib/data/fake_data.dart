@@ -38,6 +38,10 @@ var ordermodel = [
 
 final List<Active> sampleActiveOrder = [
   Active(
+      SenderName: 'Lorenz Pepito',
+      ReceiverName: 'Pedro Penduko',
+      SenderNumber: '+639321721859',
+      ReceiverNumber: '+639396266482',
       TransactionID: "123-456789",
       Schedule: "07/21/21",
       Time: "2:30",
@@ -46,9 +50,15 @@ final List<Active> sampleActiveOrder = [
       Vehicle: "Motorcycle",
       Rate: 320.00,
       State: true,
+      ItemType: 'Tshirt',
+      AddOns: 'Queueing Service',
       Remarks:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"),
   Active(
+      SenderName: 'Lorenz Pepito',
+      ReceiverName: 'Pedro Penduko',
+      SenderNumber: '+639321721859',
+      ReceiverNumber: '+639396266482',
       TransactionID: "123-456789",
       Schedule: "07/07/21",
       Time: "2:30",
@@ -57,8 +67,14 @@ final List<Active> sampleActiveOrder = [
       Vehicle: "Vehicle",
       Rate: 170.00,
       State: true,
+      ItemType: 'Tshirt',
+      AddOns: 'Insulated Box',
       Remarks: "This is a remark message From User"),
   Active(
+      SenderName: 'Lorenz Pepito',
+      ReceiverName: 'Pedro Penduko',
+      SenderNumber: '+639321721859',
+      ReceiverNumber: '+639396266482',
       TransactionID: "123-456789",
       Schedule: "07/07/21",
       Time: "2:30",
@@ -67,6 +83,8 @@ final List<Active> sampleActiveOrder = [
       Vehicle: "Vehicle",
       Rate: 170.00,
       State: true,
+      ItemType: 'Tshirt',
+      AddOns: 'Queueing Service',
       Remarks: "This is a remark message From User"),
 ];
 

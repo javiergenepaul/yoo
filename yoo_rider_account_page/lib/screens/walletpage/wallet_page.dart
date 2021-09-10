@@ -15,8 +15,8 @@ class _WalletPageState extends State<WalletPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Wallet'),
+        automaticallyImplyLeading: false,
       ),
-      drawer: MainDrawer(),
       body: Container(
         padding: EdgeInsets.all(20),
         child: Column(

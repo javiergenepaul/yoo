@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:yoo_rider_account_page/data/fake_data.dart';
 import 'package:yoo_rider_account_page/models/sample_user_rider_model.dart';
 import 'package:yoo_rider_account_page/routes/route_generator.dart';
@@ -46,7 +47,7 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        buttonDetails(context, '4.8', 'Rating'),
+                        rating(context),
                         Container(
                           height: 24,
                           child: VerticalDivider(
@@ -125,33 +126,51 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
   }
 
   Widget rating(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * .2,
-      height: MediaQuery.of(context).size.width * .2,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: active,
-          width: 3,
+    return Column(
+      children: [
+        Text(
+          'Rating  5.0',
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '4.9',
-              style: TextStyle(
-                  color: active, fontWeight: FontWeight.w500, fontSize: 18),
-            ),
-            Text(
-              'Rating',
-              style: TextStyle(fontSize: 13),
-            ),
-          ],
+        RatingBarIndicator(
+          rating: 5,
+          itemBuilder: (context, index) => Icon(
+            Icons.star,
+            color: Colors.amber,
+          ),
+          itemCount: 5,
+          itemSize: 20.0,
+          direction: Axis.horizontal,
         ),
-      ),
+      ],
     );
+    // Container(
+    //   width: MediaQuery.of(context).size.width * .2,
+    //   height: MediaQuery.of(context).size.width * .2,
+    //   decoration: BoxDecoration(
+    //     shape: BoxShape.circle,
+    //     border: Border.all(
+    //       color: active,
+    //       width: 3,
+    //     ),
+    //   ),
+    //   child: Center(
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: [
+    //         Text(
+    //           '4.9',
+    //           style: TextStyle(
+    //               color: active, fontWeight: FontWeight.w500, fontSize: 18),
+    //         ),
+    //         Text(
+    //           'Rating',
+    //           style: TextStyle(fontSize: 13),
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 
   Widget followers(BuildContext context) {

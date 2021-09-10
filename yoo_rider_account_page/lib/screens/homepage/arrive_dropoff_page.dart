@@ -7,6 +7,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:slide_to_confirm/slide_to_confirm.dart';
 import 'package:yoo_rider_account_page/constants/style_theme.dart';
+import 'package:yoo_rider_account_page/screens/homepage/active_order_page.dart';
+import 'package:yoo_rider_account_page/screens/homepage/take_orders_page.dart';
 
 final pickUpNumberSample = '+639321721859';
 final dropOffNumberSample = '+639396266482';
@@ -45,6 +47,7 @@ class _ArriveDropOffState extends State<ArriveDropOff> {
         new CameraPosition(target: latLngPosition, zoom: 16);
     newGoogleMapController!
         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+
     setState(() {
       _markers.add(
         Marker(
@@ -114,21 +117,46 @@ class _ArriveDropOffState extends State<ArriveDropOff> {
               locatePosition();
             },
           ),
-          Container(
+          Card(
             color: Colors.white,
-            child: ListTile(
-              horizontalTitleGap: 0,
-              leading: Icon(
-                Icons.person,
-                size: 20,
+            child: Container(
+              height: 60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    height: 45,
+                    width: 130,
+                    child: OutlinedButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.chat_bubble),
+                      label: Text('Message'),
+                      style: OutlinedButton.styleFrom(
+                          primary: primaryColor,
+                          side: BorderSide(color: primaryColor),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                    ),
+                  ),
+                  Container(
+                    height: 45,
+                    width: 130,
+                    child: ElevatedButton.icon(
+                      onPressed: () async {
+                        await FlutterPhoneDirectCaller.callNumber(
+                            pickUpNumberSample);
+                        // launch('tel://$pickUpSample');
+                      },
+                      icon: Icon(Icons.call),
+                      label: Text('Call'),
+                      style: ElevatedButton.styleFrom(
+                          primary: primaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                    ),
+                  ),
+                ],
               ),
-              title: Text('Customer Drop Off Contact'),
-              trailing: IconButton(
-                  onPressed: () async {
-                    await FlutterPhoneDirectCaller.callNumber(
-                        dropOffNumberSample);
-                  },
-                  icon: Icon(Icons.phone)),
             ),
           ),
           Positioned(
@@ -161,7 +189,7 @@ class _ArriveDropOffState extends State<ArriveDropOff> {
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(
-                    //     builder: (context) => (),
+                    //     builder: (context) =>
                     //   ),
                     // );
                   },

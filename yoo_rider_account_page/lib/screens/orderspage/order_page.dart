@@ -20,8 +20,8 @@ class OrderPage extends StatelessWidget {
               Tab(text: "Cancelled"),
             ],
           ),
+          automaticallyImplyLeading: false,
         ),
-        drawer: MainDrawer(),
         body: TabBarView(
           children: <Widget>[
             OrderOngoingWidget(),

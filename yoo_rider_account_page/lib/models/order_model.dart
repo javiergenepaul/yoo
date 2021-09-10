@@ -11,6 +11,10 @@ class OrderModel {
 }
 
 class Active {
+  final String SenderName;
+  final String ReceiverName;
+  final String SenderNumber;
+  final String ReceiverNumber;
   final String TransactionID;
   final String Schedule;
   final String Time;
@@ -20,8 +24,14 @@ class Active {
   final double Rate;
   final bool State;
   final String Remarks;
+  final String ItemType;
+  final String AddOns;
 
   Active({
+    required this.SenderName,
+    required this.ReceiverName,
+    required this.SenderNumber,
+    required this.ReceiverNumber,
     required this.TransactionID,
     required this.Schedule,
     required this.Time,
@@ -31,6 +41,8 @@ class Active {
     required this.Rate,
     required this.State,
     required this.Remarks,
+    required this.ItemType,
+    required this.AddOns,
   });
 }
 

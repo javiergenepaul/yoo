@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:yoo_rider_account_page/constants/style_theme.dart';
 import 'package:yoo_rider_account_page/screens/homepage/arrive_dropoff_page.dart';
 
 class TakePhoto extends StatefulWidget {
@@ -42,58 +43,72 @@ class _TakePhotoState extends State<TakePhoto> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Take Photo'),
+        title: Text('Item Details'),
       ),
       body: Container(
+        padding: EdgeInsets.all(15),
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: MediaQuery.of(context).size.height * .2,
+              height: 20,
             ),
-            Container(
-              height: MediaQuery.of(context).size.height * .6,
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Text('Lorem Ipsum generator ksdhfgsidfg'),
-                  Container(
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        getImage();
-                      },
-                      child: Row(
-                        children: [
-                          Icon(Icons.camera_alt),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text('Add Photo'),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  images == null
+            Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Take Photo of the Item',
+                  style: TextStyle(
+                      color: secondaryColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700),
+                )),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Center(
+                  child: images == null
                       ? Container(
-                          height: 200,
-                          child: Center(child: Text('Add a photo')))
+                          child: Center(
+                            child: Text('Add a photo'),
+                          ),
+                        )
                       : Image.file(
                           images!,
-                          width: 200,
-                          height: 200,
+                          width: MediaQuery.of(context).size.width - 15,
                           fit: BoxFit.cover,
-                        )
-                ],
+                        ),
+                ),
               ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width - 20,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: primaryColor,
+                ),
+                onPressed: () {
+                  getImage();
+                },
+                child: images == null ? Text('Take Photo') : Text('Re-take'),
+              ),
+            ),
+            SizedBox(
+              height: 15,
             ),
             Center(
               child: Container(
                 height: 50,
                 width: MediaQuery.of(context).size.width - 20,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
+                  ),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -105,6 +120,9 @@ class _TakePhotoState extends State<TakePhoto> {
                   child: Text('Confirm Loading'),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 30,
             ),
           ],
         ),

@@ -12,6 +12,7 @@ class NotificationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Notifications'),
         actions: [
           IconButton(
@@ -21,7 +22,6 @@ class NotificationsPage extends StatelessWidget {
               icon: Icon(Icons.settings)),
         ],
       ),
-      drawer: MainDrawer(),
       body: NotificationWidget(),
     );
   }

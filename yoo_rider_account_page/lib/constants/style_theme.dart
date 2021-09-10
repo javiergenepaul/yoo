@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 Color primaryColor = Color(0xFF8C27FF);
 Color secondaryColor = Color(0xFF9D4AFE);
 Color tertiaryColor = Color(0xFFB16DFE);
+Color backgroundOpacity = Color(0xFFECDBFF);
 Color dark = Color(0xFF363740);
 Color active = Color(0xFF3a32a8);
 

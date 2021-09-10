@@ -114,8 +114,6 @@ class _ArrivePickupState extends State<ArrivePickup> {
       body: Stack(
         children: [
           GoogleMap(
-            compassEnabled: false,
-            tiltGesturesEnabled: false,
             myLocationEnabled: true,
             markers: _markers,
             polylines: _polylines,
@@ -127,21 +125,46 @@ class _ArrivePickupState extends State<ArrivePickup> {
               locatePosition();
             },
           ),
-          Container(
+          Card(
             color: Colors.white,
-            child: ListTile(
-              horizontalTitleGap: 0,
-              leading: Icon(
-                Icons.person,
-                size: 20,
+            child: Container(
+              height: 60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    height: 45,
+                    width: 130,
+                    child: OutlinedButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.chat_bubble),
+                      label: Text('Message'),
+                      style: OutlinedButton.styleFrom(
+                          primary: primaryColor,
+                          side: BorderSide(color: primaryColor),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                    ),
+                  ),
+                  Container(
+                    height: 45,
+                    width: 130,
+                    child: ElevatedButton.icon(
+                      onPressed: () async {
+                        await FlutterPhoneDirectCaller.callNumber(
+                            pickUpNumberSample);
+                        // launch('tel://$pickUpSample');
+                      },
+                      icon: Icon(Icons.call),
+                      label: Text('Call'),
+                      style: ElevatedButton.styleFrom(
+                          primary: primaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                    ),
+                  ),
+                ],
               ),
-              title: Text('Customer Pickup Contact'),
-              trailing: IconButton(
-                  onPressed: () async {
-                    await FlutterPhoneDirectCaller.callNumber(
-                        pickUpNumberSample);
-                  },
-                  icon: Icon(Icons.phone)),
             ),
           ),
           Positioned(
