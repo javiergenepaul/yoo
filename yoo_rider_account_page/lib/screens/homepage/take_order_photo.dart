@@ -85,18 +85,29 @@ class _TakePhotoState extends State<TakePhoto> {
             SizedBox(
               height: 15,
             ),
-            Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width - 20,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: primaryColor,
-                ),
-                onPressed: () {
-                  getImage();
-                },
-                child: images == null ? Text('Take Photo') : Text('Re-take'),
-              ),
+            Center(
+              child: Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width - 20,
+                  child: images == null
+                      ? ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: primaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          onPressed: () {
+                            getImage();
+                          },
+                          child: Text('Take Photo'),
+                        )
+                      : OutlineButton(
+                          onPressed: () {
+                            getImage();
+                          },
+                          child: Text('Re-take'),
+                          borderSide: BorderSide(color: primaryColor),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)))),
             ),
             SizedBox(
               height: 15,
@@ -105,22 +116,46 @@ class _TakePhotoState extends State<TakePhoto> {
               child: Container(
                 height: 50,
                 width: MediaQuery.of(context).size.width - 20,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ArriveDropOff(),
+                child: images == null
+                    ? ElevatedButton(
+                        onPressed: null,
+                        child: Text('Done'),
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                      )
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: primaryColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ArriveDropOff(),
+                            ),
+                          );
+                        },
+                        child: Text('Done'),
                       ),
-                    );
-                  },
-                  child: Text('Confirm Loading'),
-                ),
               ),
             ),
+
+            // Container(
+            //   height: 50,
+            //   width: MediaQuery.of(context).size.width - 20,
+            //   child: OutlinedButton(
+            //     style: OutlinedButton.styleFrom(
+            //         primary: primaryColor,
+            //         shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(10))),
+            //     onPressed: () {
+            //       getImage();
+            //     },
+            //     child: images == null ? Text('Take Photo') : Text('Re-take'),
+            //   ),
+            // ),
             SizedBox(
               height: 30,
             ),

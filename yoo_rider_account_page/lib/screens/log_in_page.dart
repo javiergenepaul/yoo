@@ -33,6 +33,7 @@ class _LogInPageState extends State<LogInPage> {
   //TODO: add Controllers for Inputs
   //TODO: add Loading Indicator
   late LoginRequestModel requestModel;
+  late LoginResponseModel responseModel;
 
   @override
   void initState() {
@@ -48,7 +49,7 @@ class _LogInPageState extends State<LogInPage> {
           child: Stack(
             children: <Widget>[
               Container(
-                color: Theme.of(context).primaryColor,
+                color: primaryColor,
                 child: Opacity(
                     opacity: 0.5,
                     child: Image.asset("assets/log_in_bckgrnd.png")),
@@ -199,13 +200,13 @@ class _LogInPageState extends State<LogInPage> {
                                             // });
                                             if (value.token.isNotEmpty) {
                                               final snackbar = SnackBar(
-                                                content:
-                                                    Text('Log in Successful'),
+                                                content: Text(value.message),
                                               );
                                               scaffoldKey.currentState!
                                                   .showSnackBar(snackbar);
                                               RouteGenerator.navigateTo(
                                                   LandingPage.routeName);
+                                              print(value.message);
                                               print(value.token);
                                               print(value.driver.name);
                                               print(value.driver.email);

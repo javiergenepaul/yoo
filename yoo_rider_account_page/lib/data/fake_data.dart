@@ -86,6 +86,22 @@ final List<Active> sampleActiveOrder = [
       ItemType: 'Tshirt',
       AddOns: 'Queueing Service',
       Remarks: "This is a remark message From User"),
+  Active(
+      SenderName: 'Lorenz Pepito',
+      ReceiverName: 'Pedro Penduko',
+      SenderNumber: '+639321721859',
+      ReceiverNumber: '+639396266482',
+      TransactionID: "123-456789",
+      Schedule: "07/07/21",
+      Time: "2:30",
+      Pickup: "PickUp",
+      DropOff: "DropOff",
+      Vehicle: "Vehicle",
+      Rate: 170.00,
+      State: true,
+      ItemType: 'Tshirt',
+      AddOns: 'Queueing Service',
+      Remarks: "This is a remark message From User"),
 ];
 
 final List<Cancelled> sampleCancelledOrder = [

@@ -28,7 +28,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Yoo',
       theme: ThemeData(
-        primaryColor: Color(0xFF8C27FF),
+        // primaryColor: primaryColor,
+        // accentColor: primaryColor,
+        appBarTheme: AppBarTheme(backgroundColor: primaryColor),
       ),
       // home: RiderAccount(),
       // routes: {

@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:yoo_rider_account_page/screens/homepage/active_order_page.dart';
-import 'package:yoo_rider_account_page/widgets/drawer_widget.dart';
 import 'package:yoo_rider_account_page/constants/style_theme.dart';
 
 class HomePage extends StatefulWidget {
+  static const String routeName = '/takeorders';
+  HomePage({Key? key}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Switch.adaptive(
+                  activeColor: Colors.black,
                   value: value,
                   onChanged: (value) {
                     setState(() {

@@ -112,17 +112,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).primaryColor;
-    return Center(
-      child: Stack(
-        children: [
-          buildImage(),
-          Positioned(
-            bottom: 7,
-            right: 10,
-            child: buildEditIcon(color, context),
-          ),
-        ],
-      ),
+    return Stack(
+      children: [
+        buildImage(),
+        Positioned(
+          bottom: 3,
+          right: 3,
+          child: buildEditIcon(color, context),
+        ),
+      ],
     );
   }
 
@@ -136,8 +134,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         child: Ink.image(
           image: defImage as ImageProvider,
           fit: BoxFit.cover,
-          width: 128,
-          height: 128,
+          width: 80,
+          height: 80,
           child: InkWell(
             onTap: widget.onClicked,
           ),
@@ -160,7 +158,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             child: Icon(
               widget.isEdit ? Icons.add_a_photo : Icons.edit,
               color: Colors.white,
-              size: 18,
+              size: 12,
             ),
           ),
         ),

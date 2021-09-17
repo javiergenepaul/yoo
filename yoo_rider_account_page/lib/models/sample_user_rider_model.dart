@@ -32,8 +32,9 @@ class User {
       };
 
   static User fromJson(Map<String, dynamic> json) => User(
-      defaultImage: json['defaultImage'],
-      userName: json['userName'],
-      number: json['number'],
-      email: json['email']);
+        defaultImage: json['defaultImage'],
+        userName: json['userName'],
+        number: json['number'],
+        email: json['email'],
+      );
 }

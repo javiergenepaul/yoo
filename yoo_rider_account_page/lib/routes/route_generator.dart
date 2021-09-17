@@ -47,6 +47,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => WalletPage());
       case OrderPage.routeName:
         return MaterialPageRoute(builder: (_) => OrderPage());
+      case HomePage.routeName:
+        return MaterialPageRoute(builder: (_) => HomePage());
 
       default:
         return _noPageFound();

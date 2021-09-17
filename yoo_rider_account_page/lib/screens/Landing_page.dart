@@ -15,7 +15,6 @@ class LandingPage extends StatefulWidget {
 }
 
 class _HomePageState extends State<LandingPage> {
-  @override
   PageController _pageController = PageController();
   int _selectedIndex = 0;
 

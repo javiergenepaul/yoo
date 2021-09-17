@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:yoo_rider_account_page/constants/style_theme.dart';
 import 'package:yoo_rider_account_page/data/fake_data.dart';
 import 'package:yoo_rider_account_page/models/rider_login_model.dart';
 import 'package:yoo_rider_account_page/models/sample_user_rider_model.dart';
@@ -20,7 +21,7 @@ class ProfileSecurityBody extends StatefulWidget {
 class _ProfileSecurityBodyState extends State<ProfileSecurityBody> {
   // User user = UserPreferences.myUser;
   late User user;
-
+  final ScrollController _controller = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -44,17 +45,18 @@ class _ProfileSecurityBodyState extends State<ProfileSecurityBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(15),
       child: ListView(
         children: <Widget>[
           SafeArea(
-            child: Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ProfileWidget(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: ProfileWidget(
                       isEdit: true,
                       defaultImage: user.defaultImage,
                       onClicked: () {
@@ -85,59 +87,61 @@ class _ProfileSecurityBodyState extends State<ProfileSecurityBody> {
                           ),
                         );
                       }),
-                  SizedBox(
-                    height: 20,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ProfileTextField(
+                  label: 'Full Name',
+                  text: user.userName,
+                  onChanged: (userName) => user = user.copy(userName: userName),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ProfileTextField(
+                  label: 'Contact Number',
+                  text: user.number,
+                  onChanged: (number) => user = user.copy(number: number),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ProfileTextField(
+                  label: 'Email Address',
+                  text: user.email,
+                  onChanged: (email) => user = user.copy(email: email),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 45,
+                  width: MediaQuery.of(context).size.width,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      UserPreferences.setUser(user);
+                      Navigator.of(context).pop();
+                      print(user.userName);
+                      print(user.number);
+                      print(user.email);
+                    },
+                    child: Text('SAVE'),
+                    style: ElevatedButton.styleFrom(
+                        primary: primaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15))),
                   ),
-                  // Text(driver.name),
-                  ProfileTextField(
-                    label: 'Full Name',
-                    text: user.userName,
-                    onChanged: (userName) =>
-                        user = user.copy(userName: userName),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ProfileTextField(
-                    label: 'Contact Number',
-                    text: user.number,
-                    onChanged: (number) => user = user.copy(number: number),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ProfileTextField(
-                    label: 'Email Address',
-                    text: user.email,
-                    onChanged: (email) => user = user.copy(email: email),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    child: RaisedButton(
-                      onPressed: () {
-                        UserPreferences.setUser(user);
-                        Navigator.of(context).pop();
-                        print(user.userName);
-                        print(user.number);
-                        print(user.email);
-                      },
-                      child: Text('SAVE'),
-                      padding: EdgeInsets.all(10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                  SafeArea(
-                    child: Column(
-                      children: [
-                        passwordchange(),
-                        language(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+                // SafeArea(
+                //   child: Column(
+                //     children: [
+                //       passwordchange(),
+                //       language(),
+                //     ],
+                //   ),
+                // ),
+              ],
             ),
           ),
         ],

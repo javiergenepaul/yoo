@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+// To parse this JSON data, do
+//
+//     final loginResponseModel = loginResponseModelFromJson(jsonString);
+
 LoginResponseModel loginResponseModelFromJson(String str) =>
     LoginResponseModel.fromJson(json.decode(str));
 
@@ -7,84 +11,55 @@ String loginResponseModelToJson(LoginResponseModel data) =>
     json.encode(data.toJson());
 
 class LoginResponseModel {
-  Driver driver;
-  String token;
-
   LoginResponseModel({
+    required this.message,
     required this.driver,
     required this.token,
   });
 
+  String message;
+  Driver driver;
+  String token;
+
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       LoginResponseModel(
+        message: json["message"],
         driver: Driver.fromJson(json["driver"]),
         token: json["token"],
       );
 
   Map<String, dynamic> toJson() => {
+        "message": message,
         "driver": driver.toJson(),
         "token": token,
       };
 }
 
 class Driver {
-  int id;
-  String name;
-  String email;
-  dynamic emailVerifiedAt;
-  String city;
-  String vehicleType;
-  DateTime dateOfBirth;
-  String drivingLicenseNumber;
-  DateTime drivingLicenseExpiry;
-  String driverLicenseImage;
-  String vehicleBrand;
-  String vehicleModel;
-  String vehicleManufactureYear;
-  String licensePlateNumber;
-  dynamic trainingCompleted;
-  String nbiClearance;
-  String portrait;
-  dynamic deedOfSale;
-  String vehicleRegistration;
-  String vehicleFront;
-  String vehicleSide;
-  String vehicleBack;
-  String password;
-  dynamic status;
-  dynamic orderStatus;
-  dynamic orderGoalsPerDay;
-  dynamic incomeGoalsPerDay;
-  dynamic promptForTarget;
-  dynamic rating;
-  dynamic numberOfFans;
-  DateTime createdAt;
-  DateTime updatedAt;
-  dynamic verificationStatusId;
-
   Driver({
     required this.id,
     required this.name,
-    required this.email,
+    required this.mobileNumber,
+    this.email,
     this.emailVerifiedAt,
     required this.city,
     required this.vehicleType,
-    required this.dateOfBirth,
-    required this.drivingLicenseNumber,
-    required this.drivingLicenseExpiry,
-    required this.driverLicenseImage,
-    required this.vehicleBrand,
-    required this.vehicleModel,
-    required this.vehicleManufactureYear,
-    required this.licensePlateNumber,
+    this.dateOfBirth,
+    this.drivingLicenseNumber,
+    this.drivingLicenseExpiry,
+    this.driverLicenseImage,
+    this.vehicleBrand,
+    this.vehicleModel,
+    this.vehicleManufactureYear,
+    this.licensePlateNumber,
     this.trainingCompleted,
-    required this.nbiClearance,
-    required this.portrait,
+    this.nbiClearance,
+    this.portrait,
     this.deedOfSale,
-    required this.vehicleRegistration,
-    required this.vehicleFront,
-    required this.vehicleSide,
-    required this.vehicleBack,
+    this.vehicleRegistration,
+    this.vehicleFront,
+    this.vehicleSide,
+    this.vehicleBack,
     required this.password,
     this.status,
     this.orderStatus,
@@ -95,19 +70,55 @@ class Driver {
     this.numberOfFans,
     required this.createdAt,
     required this.updatedAt,
-    this.verificationStatusId,
+    required this.verificationStatusId,
   });
+
+  int id;
+  String name;
+  String mobileNumber;
+  dynamic email;
+  dynamic emailVerifiedAt;
+  String city;
+  String vehicleType;
+  dynamic dateOfBirth;
+  dynamic drivingLicenseNumber;
+  dynamic drivingLicenseExpiry;
+  dynamic driverLicenseImage;
+  dynamic vehicleBrand;
+  dynamic vehicleModel;
+  dynamic vehicleManufactureYear;
+  dynamic licensePlateNumber;
+  dynamic trainingCompleted;
+  dynamic nbiClearance;
+  dynamic portrait;
+  dynamic deedOfSale;
+  dynamic vehicleRegistration;
+  dynamic vehicleFront;
+  dynamic vehicleSide;
+  dynamic vehicleBack;
+  String password;
+  dynamic status;
+  dynamic orderStatus;
+  dynamic orderGoalsPerDay;
+  dynamic incomeGoalsPerDay;
+  dynamic promptForTarget;
+  dynamic rating;
+  dynamic numberOfFans;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int verificationStatusId;
 
   factory Driver.fromJson(Map<String, dynamic> json) => Driver(
         id: json["id"],
         name: json["name"],
+        mobileNumber: json["mobile_number"],
         email: json["email"],
         emailVerifiedAt: json["email_verified_at"],
         city: json["city"],
         vehicleType: json["vehicle_type"],
-        dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        dateOfBirth: json["date_of_birth"],
         drivingLicenseNumber: json["driving_license_number"],
-        drivingLicenseExpiry: DateTime.parse(json["driving_license_expiry"]),
+        drivingLicenseExpiry: json["driving_license_expiry"],
         driverLicenseImage: json["driver_license_image"],
         vehicleBrand: json["vehicle_brand"],
         vehicleModel: json["vehicle_model"],
@@ -137,15 +148,14 @@ class Driver {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "mobile_number": mobileNumber,
         "email": email,
         "email_verified_at": emailVerifiedAt,
         "city": city,
         "vehicle_type": vehicleType,
-        "date_of_birth":
-            "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
+        "date_of_birth": dateOfBirth,
         "driving_license_number": drivingLicenseNumber,
-        "driving_license_expiry":
-            "${drivingLicenseExpiry.year.toString().padLeft(4, '0')}-${drivingLicenseExpiry.month.toString().padLeft(2, '0')}-${drivingLicenseExpiry.day.toString().padLeft(2, '0')}",
+        "driving_license_expiry": drivingLicenseExpiry,
         "driver_license_image": driverLicenseImage,
         "vehicle_brand": vehicleBrand,
         "vehicle_model": vehicleModel,

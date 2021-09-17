@@ -15,7 +15,8 @@ final pickUpNumberSample = '+639321721859';
 final dropOffNumberSample = '+639396266482';
 const LatLng pickUpLocationSample = LatLng(10.2439, 123.7898);
 const LatLng currentLocationSample = LatLng(10.2325, 123.7852);
-const double CameraZoom = 16;
+const LatLng dropOffLocationSample = LatLng(10.3157, 123.8854);
+const double CameraZoom = 13;
 
 class ArrivePickup extends StatefulWidget {
   const ArrivePickup({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _ArrivePickupState extends State<ArrivePickup> {
   Position? currentPosition;
   late LatLng pickUpSample;
   late LatLng currentSample;
+  bool pos = true;
   void locatePosition() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
@@ -45,16 +47,18 @@ class _ArrivePickupState extends State<ArrivePickup> {
     LatLng latLngPosition = LatLng(position.latitude, position.longitude);
 
     CameraPosition cameraPosition =
-        new CameraPosition(target: latLngPosition, zoom: 16);
+        new CameraPosition(target: latLngPosition, zoom: CameraZoom);
     newGoogleMapController!
         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+  }
 
+  void setMarkers() {
     setState(() {
       _markers.add(
         Marker(
             markerId: MarkerId('origin Pin'),
             infoWindow: InfoWindow(title: 'Origin'),
-            position: latLngPosition,
+            position: pickUpLocationSample,
             icon:
                 BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed)),
       );
@@ -62,7 +66,7 @@ class _ArrivePickupState extends State<ArrivePickup> {
         Marker(
           markerId: MarkerId('destination Pin'),
           infoWindow: InfoWindow(title: 'Destination'),
-          position: pickUpLocationSample,
+          position: dropOffLocationSample,
           icon: BitmapDescriptor.defaultMarkerWithHue(
             BitmapDescriptor.hueGreen,
           ),
@@ -74,7 +78,7 @@ class _ArrivePickupState extends State<ArrivePickup> {
   static final CameraPosition _initialCameraPosition =
       CameraPosition(target: currentLocationSample, zoom: CameraZoom);
   static final CameraPosition _destinationCameraPosition =
-      CameraPosition(target: pickUpLocationSample, zoom: CameraZoom);
+      CameraPosition(target: pickUpLocationSample, zoom: 16);
 
   @override
   void initState() {
@@ -83,6 +87,7 @@ class _ArrivePickupState extends State<ArrivePickup> {
 
     //set up initial location
     this.setInitialLocation();
+    // this.setPolylines();
 
     //set up marker icons
 
@@ -114,7 +119,6 @@ class _ArrivePickupState extends State<ArrivePickup> {
       body: Stack(
         children: [
           GoogleMap(
-            myLocationEnabled: true,
             markers: _markers,
             polylines: _polylines,
             initialCameraPosition: _initialCameraPosition,
@@ -122,53 +126,57 @@ class _ArrivePickupState extends State<ArrivePickup> {
               _controllerGoogleMap.complete(controller);
               newGoogleMapController = controller;
               setPolylines();
+              setMarkers();
               locatePosition();
             },
           ),
-          Card(
-            color: Colors.white,
-            child: Container(
-              height: 60,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: 45,
-                    width: 130,
-                    child: OutlinedButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.chat_bubble),
-                      label: Text('Message'),
-                      style: OutlinedButton.styleFrom(
-                          primary: primaryColor,
-                          side: BorderSide(color: primaryColor),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15))),
+          Container(
+            margin: EdgeInsets.only(left: 15, right: 15),
+            height: 60,
+            child: Card(
+              color: Colors.white,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 45,
+                      width: 130,
+                      child: OutlinedButton.icon(
+                        onPressed: () {},
+                        icon: Icon(Icons.chat_bubble),
+                        label: Text('Message'),
+                        style: OutlinedButton.styleFrom(
+                            primary: primaryColor,
+                            side: BorderSide(color: primaryColor),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: 45,
-                    width: 130,
-                    child: ElevatedButton.icon(
-                      onPressed: () async {
-                        await FlutterPhoneDirectCaller.callNumber(
-                            pickUpNumberSample);
-                        // launch('tel://$pickUpSample');
-                      },
-                      icon: Icon(Icons.call),
-                      label: Text('Call'),
-                      style: ElevatedButton.styleFrom(
-                          primary: primaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15))),
+                    Container(
+                      height: 45,
+                      width: 130,
+                      child: ElevatedButton.icon(
+                        onPressed: () async {
+                          await FlutterPhoneDirectCaller.callNumber(
+                              pickUpNumberSample);
+                          // launch('tel://$pickUpSample');
+                        },
+                        icon: Icon(Icons.call),
+                        label: Text('Call'),
+                        style: ElevatedButton.styleFrom(
+                            primary: primaryColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           Positioned(
-              bottom: 150,
+              bottom: 190,
               right: 10,
               child: FloatingActionButton(
                 backgroundColor: primaryColor,
@@ -180,19 +188,20 @@ class _ArrivePickupState extends State<ArrivePickup> {
                 child: Icon(Icons.location_on),
               )),
           Positioned(
-            bottom: 50,
+            bottom: 100,
             child: Container(
-              child: Padding(
-                padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
+              child: Center(
                 child: ConfirmationSlider(
                   height: 50,
                   width: MediaQuery.of(context).size.width - 20,
-                  foregroundColor: Colors.grey,
-                  backgroundColor: secondaryColor,
+                  foregroundColor: primaryColor,
+                  backgroundColor: backgroundOpacity,
                   backgroundColorEnd: primaryColor,
-                  backgroundShape: BorderRadius.circular(50),
+                  backgroundShape: BorderRadius.circular(10),
+                  foregroundShape: BorderRadius.circular(10),
                   text: 'Arrived at Pickup',
-                  textStyle: TextStyle(color: Colors.white),
+                  textStyle: TextStyle(color: Colors.black),
                   onConfirmation: () {
                     Navigator.push(
                       context,
@@ -212,18 +221,22 @@ class _ArrivePickupState extends State<ArrivePickup> {
 
   void setPolylines() async {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "AIzaSyC-SoDyK20J4IvpdNgk9085wLdns-Zowqs",
-      PointLatLng(currentSample.latitude, currentSample.longitude),
-      PointLatLng(pickUpSample.latitude, pickUpSample.longitude),
+      "AIzaSyBL60hAErq0z9XPnxE17_SVW3sUFnMBB3w",
+      PointLatLng(
+          pickUpLocationSample.latitude, pickUpLocationSample.longitude),
+      PointLatLng(
+          dropOffLocationSample.latitude, dropOffLocationSample.longitude),
     );
-    if (result.status == 200) {
+    print(result.points);
+    print(result.status);
+    if (result.status == 'OK') {
       result.points.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
       setState(() {
         _polylines.add(Polyline(
             polylineId: PolylineId('polyline'),
-            width: 10,
+            width: 4,
             color: Colors.red,
             points: polylineCoordinates));
       });

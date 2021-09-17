@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:slide_to_confirm/slide_to_confirm.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -23,6 +26,23 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
       CameraPosition(target: LatLng(10.2325, 123.7852), zoom: 15);
   final List<Active?> actives = sampleActiveOrder;
   bool popUp = true;
+  Position? currentPosition;
+  GoogleMapController? newGoogleMapController;
+  Completer<GoogleMapController> _controllerGoogleMap = Completer();
+
+  void locatePosition() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    currentPosition = position;
+
+    LatLng latLngPosition = LatLng(position.latitude, position.longitude);
+
+    CameraPosition cameraPosition =
+        new CameraPosition(target: latLngPosition, zoom: CameraZoom);
+    newGoogleMapController!
+        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
@@ -42,6 +62,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
       elevation: 8.0,
       margin: EdgeInsets.all(8.0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
               title: Padding(
@@ -238,8 +259,9 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
               width: MediaQuery.of(context).size.width - 20,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: primaryColor,
-                ),
+                    primary: primaryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
                 onPressed: () {
                   showAlertDialog(context, active);
                 },
@@ -352,6 +374,11 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
               tiltGesturesEnabled: false,
               myLocationEnabled: true,
               initialCameraPosition: _initialCameraPosition,
+              onMapCreated: (GoogleMapController controller) {
+                _controllerGoogleMap.complete(controller);
+                newGoogleMapController = controller;
+                locatePosition();
+              },
             ),
             panelBuilder: (controller) =>
                 senderLocationDetails(active, context, panelController)));
@@ -468,26 +495,26 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
               //Message Button
               Container(
                 height: 45,
-                width: 130,
+                width: MediaQuery.of(context).size.height * .2,
                 child: OutlinedButton.icon(
                   onPressed: () {},
-                  icon: Icon(Icons.chat_bubble),
+                  icon: Icon(Icons.chat_bubble_rounded),
                   label: Text('Message'),
                   style: OutlinedButton.styleFrom(
                       primary: primaryColor,
                       side: BorderSide(color: primaryColor),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderRadius: BorderRadius.circular(10))),
                 ),
               ),
               //Call Button
               Container(
                 height: 45,
-                width: 130,
+                width: MediaQuery.of(context).size.height * .2,
                 child: ElevatedButton.icon(
-                  onPressed: () async {
-                    await FlutterPhoneDirectCaller.callNumber(
-                        pickUpNumberSample);
+                  onPressed: () {
+                    FlutterPhoneDirectCaller.callNumber(pickUpNumberSample);
+
                     // launch('tel://$pickUpSample');
                   },
                   icon: Icon(Icons.call),
@@ -495,7 +522,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                   style: ElevatedButton.styleFrom(
                       primary: primaryColor,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderRadius: BorderRadius.circular(10))),
                 ),
               ),
             ],
@@ -503,7 +530,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
           SizedBox(height: 15),
           proceedToPickUpButton(),
           SizedBox(height: 15),
-          cancelButton()
+          cancelButton(),
         ],
       ),
     );
@@ -520,7 +547,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
               child: Text("Cancel Order"),
               borderSide: BorderSide(color: primaryColor),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)))),
+                  borderRadius: BorderRadius.circular(10)))),
     );
   }
 
@@ -538,7 +565,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
             style: ElevatedButton.styleFrom(
                 primary: primaryColor,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15))),
+                    borderRadius: BorderRadius.circular(10))),
           )),
     );
   }

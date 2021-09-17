@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:yoo_rider_account_page/data/fake_data.dart';
@@ -21,65 +22,139 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
   Widget build(BuildContext context) {
     final user = UserPreferences.getUser();
     return Container(
+      padding: EdgeInsets.all(15),
       child: Column(
         children: <Widget>[
           SafeArea(
-            child: Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ProfileWidget(
-                    defaultImage: user.defaultImage,
-                    onClicked: () async {
-                      await RouteGenerator.navigateTo(
-                          ProfileSecurity.routeName);
-                      setState(() {});
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  username(user),
-                  profileSecurityButton(),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        rating(context),
-                        Container(
-                          height: 24,
-                          child: VerticalDivider(
-                            color: Colors.black,
-                          ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      ProfileWidget(
+                        defaultImage: user.defaultImage,
+                        onClicked: () async {
+                          await RouteGenerator.navigateTo(
+                              ProfileSecurity.routeName);
+                          setState(() {});
+                        },
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              user.userName,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                            Text(user.email),
+                          ],
                         ),
-                        buttonDetails(context, '100', 'Followers'),
-                        // rating(context),
-                        // followers(context),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      rating(context),
+                      Container(
+                        height: 24,
+                        child: VerticalDivider(
+                          color: Colors.black,
+                        ),
+                      ),
+                      buttonDetails(context, '100', 'Followers'),
+                      // rating(context),
+                      // followers(context),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(
             height: 10,
           ),
           Divider(),
-          SingleChildScrollView(
-            child: SafeArea(
-              child: Column(
-                children: [
-                  incomeSummary(),
-                  helpCentre(),
-                  notificationSettings(),
-                  privacyPolicy(),
-                ],
-              ),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: Text('Driver ID'),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('City'),
+                  ),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('Vehicle Type'),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('Driving License Number'),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('License Plate Number'),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('Password'),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('Log out'),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                ),
+              ],
             ),
           ),
+          profileSecurityButton(),
         ],
       ),
     );
@@ -112,16 +187,6 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
     return CircleAvatar(
       radius: 50,
       child: Icon(Icons.person),
-    );
-  }
-
-  Widget username(User user) {
-    return Text(
-      '${user.userName}',
-      style: TextStyle(
-        fontSize: 22,
-        fontWeight: FontWeight.bold,
-      ),
     );
   }
 
@@ -204,21 +269,38 @@ class _AccountBodyDetailsState extends State<AccountBodyDetails> {
   }
 
   Widget profileSecurityButton() {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FlatButton(
-            child: Text('Profile & Security'),
-            onPressed: () async {
-              await RouteGenerator.navigateTo(ProfileSecurity.routeName);
+    return Center(
+      child: Container(
+          height: 45,
+          width: MediaQuery.of(context).size.width,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileSecurity()));
               setState(() {});
             },
-          ),
-          Icon(Icons.navigate_next),
-        ],
-      ),
+            child: Text("Update Information"),
+            style: ElevatedButton.styleFrom(
+                primary: primaryColor,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10))),
+          )),
     );
+    // return Container(
+    //   child: Row(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       FlatButton(
+    //         child: Text('Profile & Security'),
+    //         onPressed: () async {
+    //           await RouteGenerator.navigateTo(ProfileSecurity.routeName);
+    //           setState(() {});
+    //         },
+    //       ),
+    //       Icon(Icons.navigate_next),
+    //     ],
+    //   ),
+    // );
   }
 
   Widget incomeSummary() {
