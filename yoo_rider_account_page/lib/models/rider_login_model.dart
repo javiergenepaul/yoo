@@ -4,6 +4,8 @@ import 'dart:convert';
 //
 //     final loginResponseModel = loginResponseModelFromJson(jsonString);
 
+import 'dart:convert';
+
 LoginResponseModel loginResponseModelFromJson(String str) =>
     LoginResponseModel.fromJson(json.decode(str));
 
@@ -38,21 +40,65 @@ class LoginResponseModel {
 class Driver {
   Driver({
     required this.id,
-    required this.name,
     required this.mobileNumber,
+    required this.password,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.verificationStatusId,
+    required this.driverInfo,
+    required this.verificationStatus,
+  });
+
+  int id;
+  String mobileNumber;
+  String password;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int verificationStatusId;
+  DriverInfo driverInfo;
+  VerificationStatus verificationStatus;
+
+  factory Driver.fromJson(Map<String, dynamic> json) => Driver(
+        id: json["id"],
+        mobileNumber: json["mobile_number"],
+        password: json["password"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        verificationStatusId: json["verification_status_id"],
+        driverInfo: DriverInfo.fromJson(json["driver_info"]),
+        verificationStatus:
+            VerificationStatus.fromJson(json["verification_status"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "mobile_number": mobileNumber,
+        "password": password,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "verification_status_id": verificationStatusId,
+        "driver_info": driverInfo.toJson(),
+        "verification_status": verificationStatus.toJson(),
+      };
+}
+
+class DriverInfo {
+  DriverInfo({
+    required this.id,
+    required this.driverId,
+    required this.firstName,
+    required this.lastName,
     this.email,
-    this.emailVerifiedAt,
     required this.city,
-    required this.vehicleType,
-    this.dateOfBirth,
-    this.drivingLicenseNumber,
-    this.drivingLicenseExpiry,
+    required this.drivingLicenseNumber,
+    required this.drivingLicenseExpiry,
     this.driverLicenseImage,
-    this.vehicleBrand,
-    this.vehicleModel,
-    this.vehicleManufactureYear,
-    this.licensePlateNumber,
-    this.trainingCompleted,
+    required this.dateOfBirth,
+    this.vehicleId,
+    required this.vehicleBrand,
+    required this.vehicleModel,
+    required this.vehicleManufactureYear,
+    required this.licensePlateNumber,
     this.nbiClearance,
     this.portrait,
     this.deedOfSale,
@@ -60,35 +106,30 @@ class Driver {
     this.vehicleFront,
     this.vehicleSide,
     this.vehicleBack,
-    required this.password,
-    this.status,
-    this.orderStatus,
+    required this.status,
     this.orderGoalsPerDay,
     this.incomeGoalsPerDay,
     this.promptForTarget,
-    this.rating,
     this.numberOfFans,
     required this.createdAt,
     required this.updatedAt,
-    required this.verificationStatusId,
   });
 
   int id;
-  String name;
-  String mobileNumber;
+  int driverId;
+  String firstName;
+  String lastName;
   dynamic email;
-  dynamic emailVerifiedAt;
   String city;
-  String vehicleType;
-  dynamic dateOfBirth;
-  dynamic drivingLicenseNumber;
-  dynamic drivingLicenseExpiry;
+  String drivingLicenseNumber;
+  DateTime drivingLicenseExpiry;
   dynamic driverLicenseImage;
-  dynamic vehicleBrand;
-  dynamic vehicleModel;
-  dynamic vehicleManufactureYear;
-  dynamic licensePlateNumber;
-  dynamic trainingCompleted;
+  DateTime dateOfBirth;
+  dynamic vehicleId;
+  String vehicleBrand;
+  String vehicleModel;
+  String vehicleManufactureYear;
+  String licensePlateNumber;
   dynamic nbiClearance;
   dynamic portrait;
   dynamic deedOfSale;
@@ -96,35 +137,30 @@ class Driver {
   dynamic vehicleFront;
   dynamic vehicleSide;
   dynamic vehicleBack;
-  String password;
-  dynamic status;
-  dynamic orderStatus;
+  int status;
   dynamic orderGoalsPerDay;
   dynamic incomeGoalsPerDay;
   dynamic promptForTarget;
-  dynamic rating;
   dynamic numberOfFans;
   DateTime createdAt;
   DateTime updatedAt;
-  int verificationStatusId;
 
-  factory Driver.fromJson(Map<String, dynamic> json) => Driver(
+  factory DriverInfo.fromJson(Map<String, dynamic> json) => DriverInfo(
         id: json["id"],
-        name: json["name"],
-        mobileNumber: json["mobile_number"],
+        driverId: json["driver_id"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
         email: json["email"],
-        emailVerifiedAt: json["email_verified_at"],
         city: json["city"],
-        vehicleType: json["vehicle_type"],
-        dateOfBirth: json["date_of_birth"],
         drivingLicenseNumber: json["driving_license_number"],
-        drivingLicenseExpiry: json["driving_license_expiry"],
+        drivingLicenseExpiry: DateTime.parse(json["driving_license_expiry"]),
         driverLicenseImage: json["driver_license_image"],
+        dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        vehicleId: json["vehicle_id"],
         vehicleBrand: json["vehicle_brand"],
         vehicleModel: json["vehicle_model"],
         vehicleManufactureYear: json["vehicle_manufacture_year"],
         licensePlateNumber: json["license_plate_number"],
-        trainingCompleted: json["training_completed"],
         nbiClearance: json["nbi_clearance"],
         portrait: json["portrait"],
         deedOfSale: json["deed_of_sale"],
@@ -132,36 +168,33 @@ class Driver {
         vehicleFront: json["vehicle_front"],
         vehicleSide: json["vehicle_side"],
         vehicleBack: json["vehicle_back"],
-        password: json["password"],
         status: json["status"],
-        orderStatus: json["order_status"],
         orderGoalsPerDay: json["order_goals_per_day"],
         incomeGoalsPerDay: json["income_goals_per_day"],
         promptForTarget: json["prompt_for_target"],
-        rating: json["rating"],
         numberOfFans: json["number_of_fans"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        verificationStatusId: json["verification_status_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name": name,
-        "mobile_number": mobileNumber,
+        "driver_id": driverId,
+        "first_name": firstName,
+        "last_name": lastName,
         "email": email,
-        "email_verified_at": emailVerifiedAt,
         "city": city,
-        "vehicle_type": vehicleType,
-        "date_of_birth": dateOfBirth,
         "driving_license_number": drivingLicenseNumber,
-        "driving_license_expiry": drivingLicenseExpiry,
+        "driving_license_expiry":
+            "${drivingLicenseExpiry.year.toString().padLeft(4, '0')}-${drivingLicenseExpiry.month.toString().padLeft(2, '0')}-${drivingLicenseExpiry.day.toString().padLeft(2, '0')}",
         "driver_license_image": driverLicenseImage,
+        "date_of_birth":
+            "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
+        "vehicle_id": vehicleId,
         "vehicle_brand": vehicleBrand,
         "vehicle_model": vehicleModel,
         "vehicle_manufacture_year": vehicleManufactureYear,
         "license_plate_number": licensePlateNumber,
-        "training_completed": trainingCompleted,
         "nbi_clearance": nbiClearance,
         "portrait": portrait,
         "deed_of_sale": deedOfSale,
@@ -169,17 +202,42 @@ class Driver {
         "vehicle_front": vehicleFront,
         "vehicle_side": vehicleSide,
         "vehicle_back": vehicleBack,
-        "password": password,
         "status": status,
-        "order_status": orderStatus,
         "order_goals_per_day": orderGoalsPerDay,
         "income_goals_per_day": incomeGoalsPerDay,
         "prompt_for_target": promptForTarget,
-        "rating": rating,
         "number_of_fans": numberOfFans,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "verification_status_id": verificationStatusId,
+      };
+}
+
+class VerificationStatus {
+  VerificationStatus({
+    required this.id,
+    required this.status,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  int id;
+  String status;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory VerificationStatus.fromJson(Map<String, dynamic> json) =>
+      VerificationStatus(
+        id: json["id"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
       };
 }
 
