@@ -3,18 +3,18 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:yoo_rider_account_page/services/fake_data.dart';
 
 class ProfileTextField extends StatefulWidget {
   final int maxLines;
+  final bool hide;
   final String label;
   final String text;
   final ValueChanged<String> onChanged;
 
   const ProfileTextField(
       {Key? key,
+      this.hide = false,
       this.maxLines = 1,
       required this.label,
       required this.text,
@@ -57,6 +57,7 @@ class _ProfileTextFieldState extends State<ProfileTextField> {
         Container(
           height: 50,
           child: TextField(
+            obscureText: widget.hide,
             maxLines: widget.maxLines,
             onChanged: widget.onChanged,
             controller: controller,
@@ -156,7 +157,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               //     context: context, builder: (builder) => bottomSheet(context));
             },
             child: Icon(
-              widget.isEdit ? Icons.add_a_photo : Icons.edit,
+              Icons.edit,
               color: Colors.white,
               size: 12,
             ),

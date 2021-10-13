@@ -3,9 +3,7 @@ import 'package:yoo_rider_account_page/screens/landingpage/pages/Landing_page.da
 import 'package:yoo_rider_account_page/screens/orderspage/pages/order_page.dart';
 import 'package:yoo_rider_account_page/screens/homepage/pages/home_page.dart';
 import 'package:yoo_rider_account_page/screens/loginpage/pages/log_in_page.dart';
-import 'package:yoo_rider_account_page/screens/notifpage/pages/notification_settings_page.dart';
-import 'package:yoo_rider_account_page/screens/notifpage/pages/notifications_page.dart';
-import 'package:yoo_rider_account_page/screens/profilepage/pages/profile_and_security_page.dart';
+import 'package:yoo_rider_account_page/screens/profilepage/pages/update_profile_page.dart';
 import 'package:yoo_rider_account_page/screens/profilepage/pages/rider_account_page.dart';
 import 'package:yoo_rider_account_page/screens/walletpage/pages/wallet_page.dart';
 
@@ -31,12 +29,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LogInPage());
       case LandingPage.routeName:
         return MaterialPageRoute(builder: (_) => LandingPage());
-      case NotificationsPage.routeName:
-        return MaterialPageRoute(builder: (_) => NotificationsPage());
-      case ProfileSecurity.routeName:
-        return MaterialPageRoute(builder: (_) => ProfileSecurity());
-      case NotificationSettings.routeName:
-        return MaterialPageRoute(builder: (_) => NotificationSettings());
+      case UpdateProfile.routeName:
+        return MaterialPageRoute(builder: (_) => UpdateProfile());
       case WalletPage.routeName:
         return MaterialPageRoute(builder: (_) => WalletPage());
       case OrderPage.routeName:

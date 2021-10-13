@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:slide_to_confirm/slide_to_confirm.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:yoo_rider_account_page/constants/style_theme.dart';
+import 'package:yoo_rider_account_page/models/active_order_model.dart';
 import 'package:yoo_rider_account_page/screens/homepage/models/order_model.dart';
 import 'package:yoo_rider_account_page/screens/homepage/pages/arrive_pickup_page.dart';
 import 'package:yoo_rider_account_page/services/api_service.dart';
@@ -23,10 +24,9 @@ class ActiveOrdersPage extends StatefulWidget {
 }
 
 class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
+  late Future<OrderModel> ordersModel;
   static final CameraPosition _initialCameraPosition =
       CameraPosition(target: LatLng(10.2325, 123.7852), zoom: 15);
-  final List<Active?> actives = sampleActiveOrder;
-  bool popUp = true;
   Position? currentPosition;
   GoogleMapController? newGoogleMapController;
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
@@ -45,23 +45,53 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      child: Scrollbar(
-        child: ListView.builder(
-          padding: EdgeInsets.all(8.0),
-          itemCount: sampleActiveOrder.length,
-          itemBuilder: (context, i) {
-            Active? active = actives[i];
-            return OrderActiveItems(active!, context);
-          },
-        ),
-      ),
-    );
+  void initState() {
+    ordersModel = APIService().getOrders();
+    super.initState();
   }
 
-  Widget OrderActiveItems(Active active, context) {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: FutureBuilder<OrderModel>(
+        future: ordersModel,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data!.totalOrders,
+              itemBuilder: (context, index) {
+                Order? active = snapshot.data!.orders[index];
+                var orders = snapshot.data!.orders[index];
+                return OrderActiveItems(active, context);
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Container(
+              child: Center(
+                child: Text('No Data'),
+              ),
+            );
+          }
+          return Center(child: const CircularProgressIndicator());
+        },
+      ),
+    );
+    // return Container(
+    //   padding: EdgeInsets.all(5),
+    //   child: Scrollbar(
+    //     child: ListView.builder(
+    //       padding: EdgeInsets.all(8.0),
+    //       itemCount: sampleActiveOrder.length,
+    //       itemBuilder: (context, i) {
+    // Active? active = actives[i];
+    //         return OrderActiveItems(active!, context);
+    //       },
+    //     ),
+    //   ),
+    // );
+  }
+
+  Widget OrderActiveItems(Order active, context) {
     return Card(
       color: greyOpacity,
       elevation: 8.0,
@@ -84,10 +114,10 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Item Type: ${active.ItemType}'),
+                        Text('Item Type: ${active.id}'),
                         Spacer(),
                         Text(
-                          ' PHP ' + active.Rate.toStringAsFixed(2),
+                          ' PHP ' + active.totalAmount.toStringAsFixed(2),
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -104,7 +134,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text('${active.Pickup}'),
+                          Text('${active.pickupInfo.address}'),
                         ],
                       ),
                     ),
@@ -119,7 +149,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text(active.DropOff),
+                          Text(active.dropoffLocations.toString()),
                         ],
                       ),
                     ),
@@ -134,7 +164,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text(active.Schedule),
+                          Text(active.pickupInfo.date.toString()),
                           Spacer(),
                         ],
                       ),
@@ -160,7 +190,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
     );
   }
 
-  Widget draggableOrderDetails(Active active, context) {
+  Widget draggableOrderDetails(Order active, context) {
     return Container(
       padding: EdgeInsets.only(top: 5, right: 20, left: 20, bottom: 30),
       height: MediaQuery.of(context).size.height * .4,
@@ -198,7 +228,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${active.SenderName}',
+                    '${active.pickupInfo.orderId}',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                   ),
                   Text(
@@ -217,7 +247,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                         color: secondaryColor,
                       ),
                       SizedBox(width: 5),
-                      Text('PHP ${active.Rate.toStringAsFixed(2)}'),
+                      Text('PHP ${active.totalAmount.toStringAsFixed(2)}'),
                     ],
                   ),
                   Row(
@@ -227,7 +257,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                         color: secondaryColor,
                       ),
                       SizedBox(width: 5),
-                      Text('${active.Schedule}')
+                      Text('${active.pickupInfo.time}')
                     ],
                   )
                 ],
@@ -244,7 +274,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
               ),
               SizedBox(width: 5),
               Text(
-                '${active.Pickup}',
+                '${active.pickupInfo.address}',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
               ),
             ],
@@ -257,7 +287,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                 color: secondaryColor,
               ),
               SizedBox(width: 5),
-              Text('${active.DropOff}',
+              Text('${active.dropoffLocations}',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
             ],
           ),
@@ -304,7 +334,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
   }
 
   //Alert Dialog Order
-  void showAlertDialog(BuildContext context, Active active) {
+  void showAlertDialog(BuildContext context, Order active) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -366,7 +396,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
         });
   }
 
-  Widget senderLocation(Active active, context) {
+  Widget senderLocation(Order active, context) {
     final panelController = PanelController();
     return Scaffold(
         appBar: AppBar(
@@ -376,7 +406,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
         body: SlidingUpPanel(
             controller: panelController,
             minHeight: MediaQuery.of(context).size.height * .5,
-            maxHeight: MediaQuery.of(context).size.height * .9,
+            maxHeight: MediaQuery.of(context).size.height * .5,
             borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
             body: GoogleMap(
               compassEnabled: false,
@@ -394,7 +424,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
   }
 
   Widget senderLocationDetails(
-      Active active, context, PanelController panelController) {
+      Order active, context, PanelController panelController) {
     final ScrollController controller;
     return Container(
       padding: EdgeInsets.only(top: 5, right: 20, left: 20, bottom: 30),
@@ -435,7 +465,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${active.SenderName}',
+                    '${active.customerId}',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                   ),
                   Text(
@@ -454,7 +484,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                         color: secondaryColor,
                       ),
                       SizedBox(width: 5),
-                      Text('PHP ${active.Rate.toStringAsFixed(2)}'),
+                      Text('PHP ${active.totalAmount.toStringAsFixed(2)}'),
                     ],
                   ),
                   Row(
@@ -464,7 +494,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                         color: secondaryColor,
                       ),
                       SizedBox(width: 5),
-                      Text('${active.Schedule}')
+                      Text('${active.pickupInfo.time}')
                     ],
                   )
                 ],
@@ -481,7 +511,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
               ),
               SizedBox(width: 5),
               Text(
-                '${active.Pickup}',
+                '${active.pickupInfo.address}',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
               ),
             ],
@@ -494,7 +524,7 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                 color: secondaryColor,
               ),
               SizedBox(width: 5),
-              Text('${active.DropOff}',
+              Text('${active.dropoffLocations}',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
             ],
           ),
@@ -524,7 +554,6 @@ class _ActiveOrdersPageState extends State<ActiveOrdersPage> {
                 child: ElevatedButton.icon(
                   onPressed: () {
                     FlutterPhoneDirectCaller.callNumber(pickUpNumberSample);
-
                     // launch('tel://$pickUpSample');
                   },
                   icon: Icon(Icons.phone_in_talk),

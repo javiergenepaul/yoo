@@ -1,37 +1,33 @@
 // To parse this JSON data, do
 //
-//     final loginResponseModel = loginResponseModelFromJson(jsonString);
+//     final profileUpdateResponse = profileUpdateResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-LoginResponseModel loginResponseModelFromJson(String str) =>
-    LoginResponseModel.fromJson(json.decode(str));
+ProfileUpdateResponse profileUpdateResponseFromJson(String str) =>
+    ProfileUpdateResponse.fromJson(json.decode(str));
 
-String loginResponseModelToJson(LoginResponseModel data) =>
+String profileUpdateResponseToJson(ProfileUpdateResponse data) =>
     json.encode(data.toJson());
 
-class LoginResponseModel {
-  LoginResponseModel({
+class ProfileUpdateResponse {
+  ProfileUpdateResponse({
     required this.message,
     required this.user,
-    required this.token,
   });
 
   String message;
   User user;
-  String token;
 
-  factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
-      LoginResponseModel(
+  factory ProfileUpdateResponse.fromJson(Map<String, dynamic> json) =>
+      ProfileUpdateResponse(
         message: json["message"],
         user: User.fromJson(json["user"]),
-        token: json["token"],
       );
 
   Map<String, dynamic> toJson() => {
         "message": message,
         "user": user.toJson(),
-        "token": token,
       };
 }
 
@@ -43,8 +39,8 @@ class User {
     this.emailVerifiedAt,
     required this.createdAt,
     required this.updatedAt,
-    required this.driver,
     required this.userInfo,
+    required this.driver,
   });
 
   int id;
@@ -53,8 +49,8 @@ class User {
   dynamic emailVerifiedAt;
   DateTime createdAt;
   DateTime updatedAt;
-  Driver driver;
   UserInfo userInfo;
+  Driver driver;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -63,8 +59,8 @@ class User {
         emailVerifiedAt: json["email_verified_at"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        driver: Driver.fromJson(json["driver"]),
         userInfo: UserInfo.fromJson(json["user_info"]),
+        driver: Driver.fromJson(json["driver"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -74,8 +70,8 @@ class User {
         "email_verified_at": emailVerifiedAt,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "driver": driver.toJson(),
         "user_info": userInfo.toJson(),
+        "driver": driver.toJson(),
       };
 }
 
@@ -83,9 +79,9 @@ class Driver {
   Driver({
     required this.id,
     required this.userId,
-    required this.city,
+    this.city,
     this.drivingLicenseNumber,
-    this.drivingLicenseExpiry,
+    required this.drivingLicenseExpiry,
     this.driverLicenseImage,
     this.vehicleBrand,
     this.vehicleModel,
@@ -106,14 +102,13 @@ class Driver {
     required this.verificationStatusId,
     required this.vehicleId,
     required this.verificationStatus,
-    required this.vehicle,
   });
 
   int id;
   int userId;
-  String city;
+  dynamic city;
   dynamic drivingLicenseNumber;
-  dynamic drivingLicenseExpiry;
+  DateTime drivingLicenseExpiry;
   dynamic driverLicenseImage;
   dynamic vehicleBrand;
   dynamic vehicleModel;
@@ -134,14 +129,13 @@ class Driver {
   int verificationStatusId;
   int vehicleId;
   VerificationStatus verificationStatus;
-  Vehicle vehicle;
 
   factory Driver.fromJson(Map<String, dynamic> json) => Driver(
         id: json["id"],
         userId: json["user_id"],
         city: json["city"],
         drivingLicenseNumber: json["driving_license_number"],
-        drivingLicenseExpiry: json["driving_license_expiry"],
+        drivingLicenseExpiry: DateTime.parse(json["driving_license_expiry"]),
         driverLicenseImage: json["driver_license_image"],
         vehicleBrand: json["vehicle_brand"],
         vehicleModel: json["vehicle_model"],
@@ -163,7 +157,6 @@ class Driver {
         vehicleId: json["vehicle_id"],
         verificationStatus:
             VerificationStatus.fromJson(json["verification_status"]),
-        vehicle: Vehicle.fromJson(json["vehicle"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -171,7 +164,8 @@ class Driver {
         "user_id": userId,
         "city": city,
         "driving_license_number": drivingLicenseNumber,
-        "driving_license_expiry": drivingLicenseExpiry,
+        "driving_license_expiry":
+            "${drivingLicenseExpiry.year.toString().padLeft(4, '0')}-${drivingLicenseExpiry.month.toString().padLeft(2, '0')}-${drivingLicenseExpiry.day.toString().padLeft(2, '0')}",
         "driver_license_image": driverLicenseImage,
         "vehicle_brand": vehicleBrand,
         "vehicle_model": vehicleModel,
@@ -192,171 +186,35 @@ class Driver {
         "verification_status_id": verificationStatusId,
         "vehicle_id": vehicleId,
         "verification_status": verificationStatus.toJson(),
-        "vehicle": vehicle.toJson(),
-      };
-}
-
-class Vehicle {
-  Vehicle({
-    required this.id,
-    required this.type,
-    required this.maxWeightKg,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.vehicleDimension,
-    required this.vehicleRates,
-  });
-
-  int id;
-  String type;
-  int maxWeightKg;
-  DateTime createdAt;
-  DateTime updatedAt;
-  VehicleDimension vehicleDimension;
-  List<VehicleRate> vehicleRates;
-
-  factory Vehicle.fromJson(Map<String, dynamic> json) => Vehicle(
-        id: json["id"],
-        type: json["type"],
-        maxWeightKg: json["max_weight_kg"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        vehicleDimension: VehicleDimension.fromJson(json["vehicle_dimension"]),
-        vehicleRates: List<VehicleRate>.from(
-            json["vehicle_rates"].map((x) => VehicleRate.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "type": type,
-        "max_weight_kg": maxWeightKg,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "vehicle_dimension": vehicleDimension.toJson(),
-        "vehicle_rates":
-            List<dynamic>.from(vehicleRates.map((x) => x.toJson())),
-      };
-}
-
-class VehicleDimension {
-  VehicleDimension({
-    required this.id,
-    required this.vehicleId,
-    required this.lengthFt,
-    required this.widthFt,
-    required this.heightFt,
-    required this.createdAt,
-    required this.updatedAt,
-  });
-
-  int id;
-  int vehicleId;
-  double lengthFt;
-  double widthFt;
-  double heightFt;
-  DateTime createdAt;
-  DateTime updatedAt;
-
-  factory VehicleDimension.fromJson(Map<String, dynamic> json) =>
-      VehicleDimension(
-        id: json["id"],
-        vehicleId: json["vehicle_id"],
-        lengthFt: json["length_ft"].toDouble(),
-        widthFt: json["width_ft"].toDouble(),
-        heightFt: json["height_ft"].toDouble(),
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "vehicle_id": vehicleId,
-        "length_ft": lengthFt,
-        "width_ft": widthFt,
-        "height_ft": heightFt,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-      };
-}
-
-class VehicleRate {
-  VehicleRate({
-    required this.id,
-    required this.vehicleId,
-    required this.areaId,
-    required this.baseFair,
-    required this.chargePerKm,
-    required this.perAddStop,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.area,
-  });
-
-  int id;
-  int vehicleId;
-  int areaId;
-  int baseFair;
-  int chargePerKm;
-  int perAddStop;
-  DateTime createdAt;
-  DateTime updatedAt;
-  VerificationStatus area;
-
-  factory VehicleRate.fromJson(Map<String, dynamic> json) => VehicleRate(
-        id: json["id"],
-        vehicleId: json["vehicle_id"],
-        areaId: json["area_id"],
-        baseFair: json["base_fair"],
-        chargePerKm: json["charge_per_km"],
-        perAddStop: json["per_add_stop"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        area: VerificationStatus.fromJson(json["area"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "vehicle_id": vehicleId,
-        "area_id": areaId,
-        "base_fair": baseFair,
-        "charge_per_km": chargePerKm,
-        "per_add_stop": perAddStop,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "area": area.toJson(),
       };
 }
 
 class VerificationStatus {
   VerificationStatus({
     required this.id,
-    required this.description,
+    required this.status,
     required this.createdAt,
     required this.updatedAt,
-    required this.status,
   });
 
   int id;
-  String description;
+  String status;
   DateTime createdAt;
   DateTime updatedAt;
-  String status;
 
   factory VerificationStatus.fromJson(Map<String, dynamic> json) =>
       VerificationStatus(
         id: json["id"],
-        description: json["description"] == null ? '' : json["description"],
+        status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        status: json["status"] == null ? '' : json["status"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "description": description == null ? '' : description,
+        "status": status,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "status": status == null ? '' : description,
       };
 }
 
@@ -367,9 +225,16 @@ class UserInfo {
     required this.firstName,
     required this.lastName,
     required this.dateOfBirth,
-    this.profilePicture,
+    required this.profilePicture,
     required this.createdAt,
     required this.updatedAt,
+    required this.middleName,
+    this.country,
+    this.province,
+    this.cityMunicipality,
+    this.postalCode,
+    this.barangay,
+    this.address,
   });
 
   int id;
@@ -377,9 +242,16 @@ class UserInfo {
   String firstName;
   String lastName;
   DateTime dateOfBirth;
-  dynamic profilePicture;
+  String profilePicture;
   DateTime createdAt;
   DateTime updatedAt;
+  String middleName;
+  dynamic country;
+  dynamic province;
+  dynamic cityMunicipality;
+  dynamic postalCode;
+  dynamic barangay;
+  dynamic address;
 
   factory UserInfo.fromJson(Map<String, dynamic> json) => UserInfo(
         id: json["id"],
@@ -390,6 +262,13 @@ class UserInfo {
         profilePicture: json["profile_picture"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        middleName: json["middle_name"],
+        country: json["country"],
+        province: json["province"],
+        cityMunicipality: json["city_municipality"],
+        postalCode: json["postal_code"],
+        barangay: json["barangay"],
+        address: json["address"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -402,49 +281,93 @@ class UserInfo {
         "profile_picture": profilePicture,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+        "middle_name": middleName,
+        "country": country,
+        "province": province,
+        "city_municipality": cityMunicipality,
+        "postal_code": postalCode,
+        "barangay": barangay,
+        "address": address,
       };
 }
 
-LoginRequestModel loginRequestModelFromJson(String str) =>
-    LoginRequestModel.fromJson(json.decode(str));
+ProfileUpdateRequest profileUpdateRequestFromJson(String str) =>
+    ProfileUpdateRequest.fromJson(json.decode(str));
 
-String loginRequestModelToJson(LoginRequestModel data) =>
+String profileUpdateRequestToJson(ProfileUpdateRequest data) =>
     json.encode(data.toJson());
 
-class LoginRequestModel {
-  LoginRequestModel({
-    required this.account,
-    required this.password,
+class ProfileUpdateRequest {
+  ProfileUpdateRequest({
+    required this.firstName,
+    required this.lastName,
+    required this.dateOfBirth,
+    required this.profilePicture,
+    required this.middleName,
+    required this.drivingLicenseExpiry,
+    required this.vehicleId,
+    required this.driverLicenseImage,
+    required this.nbiClearance,
+    required this.deedOfSale,
+    required this.vehicleRegistration,
+    required this.vehicleFront,
+    required this.vehicleSide,
+    required this.vehicleBack,
+    required this.vaxCertificate,
   });
 
-  String account;
-  String password;
+  String firstName;
+  String lastName;
+  DateTime dateOfBirth;
+  String profilePicture;
+  String middleName;
+  DateTime drivingLicenseExpiry;
+  String vehicleId;
+  String driverLicenseImage;
+  String nbiClearance;
+  String deedOfSale;
+  String vehicleRegistration;
+  String vehicleFront;
+  String vehicleSide;
+  String vehicleBack;
+  String vaxCertificate;
 
-  factory LoginRequestModel.fromJson(Map<String, dynamic> json) =>
-      LoginRequestModel(
-        account: json["account"],
-        password: json["password"],
+  factory ProfileUpdateRequest.fromJson(Map<String, dynamic> json) =>
+      ProfileUpdateRequest(
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        profilePicture: json["profile_picture"],
+        middleName: json["middle_name"],
+        drivingLicenseExpiry: DateTime.parse(json["driving_license_expiry"]),
+        vehicleId: json["vehicle_id"],
+        driverLicenseImage: json["driver_license_image"],
+        nbiClearance: json["nbi_clearance"],
+        deedOfSale: json["deed_of_sale"],
+        vehicleRegistration: json["vehicle_registration"],
+        vehicleFront: json["vehicle_front"],
+        vehicleSide: json["vehicle_side"],
+        vehicleBack: json["vehicle_back"],
+        vaxCertificate: json["vax_certificate"],
       );
 
   Map<String, dynamic> toJson() => {
-        "account": account,
-        "password": password,
+        "first_name": firstName,
+        "last_name": lastName,
+        "date_of_birth":
+            "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
+        "profile_picture": profilePicture,
+        "middle_name": middleName,
+        "driving_license_expiry":
+            "${drivingLicenseExpiry.year.toString().padLeft(4, '0')}-${drivingLicenseExpiry.month.toString().padLeft(2, '0')}-${drivingLicenseExpiry.day.toString().padLeft(2, '0')}",
+        "vehicle_id": vehicleId,
+        "driver_license_image": driverLicenseImage,
+        "nbi_clearance": nbiClearance,
+        "deed_of_sale": deedOfSale,
+        "vehicle_registration": vehicleRegistration,
+        "vehicle_front": vehicleFront,
+        "vehicle_side": vehicleSide,
+        "vehicle_back": vehicleBack,
+        "vax_certificate": vaxCertificate,
       };
 }
-
-
-
-// class LoginRequestModel {
-//   String mobileNumber;
-//   String password;
-
-//   LoginRequestModel({required this.mobileNumber, required this.password});
-
-//   Map<String, dynamic> toJson() {
-//     Map<String, dynamic> map = {
-//       'mobile_bumber': mobileNumber.trim(),
-//       'password': password.trim()
-//     };
-//     return map;
-//   }
-// }

@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yoo_rider_account_page/models/notification_model.dart';
 import 'package:yoo_rider_account_page/screens/homepage/models/order_model.dart';
-import 'package:yoo_rider_account_page/models/rider_login_model.dart';
 import 'package:yoo_rider_account_page/models/sample_user_rider_model.dart';
 import 'package:yoo_rider_account_page/models/wallet_models.dart';
 
@@ -36,73 +34,73 @@ var ordermodel = [
 //       Rate: 141.50),
 // ];
 
-final List<Active> sampleActiveOrder = [
-  Active(
-      SenderName: 'Lorenz Pepito',
-      ReceiverName: 'Pedro Penduko',
-      SenderNumber: '+639321721859',
-      ReceiverNumber: '+639396266482',
-      TransactionID: "123-456789",
-      Schedule: "07/21/21",
-      Time: "2:30",
-      Pickup: "Tungkop Minglanilla, Cebu",
-      DropOff: "Colon Naga City, Cebu",
-      Vehicle: "Motorcycle",
-      Rate: 320.00,
-      State: true,
-      ItemType: 'Tshirt',
-      AddOns: 'Queueing Service',
-      Remarks:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"),
-  Active(
-      SenderName: 'Lorenz Pepito',
-      ReceiverName: 'Pedro Penduko',
-      SenderNumber: '+639321721859',
-      ReceiverNumber: '+639396266482',
-      TransactionID: "123-456789",
-      Schedule: "07/07/21",
-      Time: "2:30",
-      Pickup: "PickUp",
-      DropOff: "DropOff",
-      Vehicle: "Vehicle",
-      Rate: 170.00,
-      State: true,
-      ItemType: 'Tshirt',
-      AddOns: 'Insulated Box',
-      Remarks: "This is a remark message From User"),
-  Active(
-      SenderName: 'Lorenz Pepito',
-      ReceiverName: 'Pedro Penduko',
-      SenderNumber: '+639321721859',
-      ReceiverNumber: '+639396266482',
-      TransactionID: "123-456789",
-      Schedule: "07/07/21",
-      Time: "2:30",
-      Pickup: "PickUp",
-      DropOff: "DropOff",
-      Vehicle: "Vehicle",
-      Rate: 170.00,
-      State: true,
-      ItemType: 'Tshirt',
-      AddOns: 'Queueing Service',
-      Remarks: "This is a remark message From User"),
-  Active(
-      SenderName: 'Lorenz Pepito',
-      ReceiverName: 'Pedro Penduko',
-      SenderNumber: '+639321721859',
-      ReceiverNumber: '+639396266482',
-      TransactionID: "123-456789",
-      Schedule: "07/07/21",
-      Time: "2:30",
-      Pickup: "PickUp",
-      DropOff: "DropOff",
-      Vehicle: "Vehicle",
-      Rate: 170.00,
-      State: true,
-      ItemType: 'Tshirt',
-      AddOns: 'Queueing Service',
-      Remarks: "This is a remark message From User"),
-];
+// final List<Active> sampleActiveOrder = [
+//   Active(
+//       SenderName: 'Lorenz Pepito',
+//       ReceiverName: 'Pedro Penduko',
+//       SenderNumber: '+639321721859',
+//       ReceiverNumber: '+639396266482',
+//       TransactionID: "123-456789",
+//       Schedule: "07/21/21",
+//       Time: "2:30",
+//       Pickup: "Tungkop Minglanilla, Cebu",
+//       DropOff: "Colon Naga City, Cebu",
+//       Vehicle: "Motorcycle",
+//       Rate: 320.00,
+//       State: true,
+//       ItemType: 'Tshirt',
+//       AddOns: 'Queueing Service',
+//       Remarks:
+//           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"),
+//   Active(
+//       SenderName: 'Lorenz Pepito',
+//       ReceiverName: 'Pedro Penduko',
+//       SenderNumber: '+639321721859',
+//       ReceiverNumber: '+639396266482',
+//       TransactionID: "123-456789",
+//       Schedule: "07/07/21",
+//       Time: "2:30",
+//       Pickup: "PickUp",
+//       DropOff: "DropOff",
+//       Vehicle: "Vehicle",
+//       Rate: 170.00,
+//       State: true,
+//       ItemType: 'Tshirt',
+//       AddOns: 'Insulated Box',
+//       Remarks: "This is a remark message From User"),
+//   Active(
+//       SenderName: 'Lorenz Pepito',
+//       ReceiverName: 'Pedro Penduko',
+//       SenderNumber: '+639321721859',
+//       ReceiverNumber: '+639396266482',
+//       TransactionID: "123-456789",
+//       Schedule: "07/07/21",
+//       Time: "2:30",
+//       Pickup: "PickUp",
+//       DropOff: "DropOff",
+//       Vehicle: "Vehicle",
+//       Rate: 170.00,
+//       State: true,
+//       ItemType: 'Tshirt',
+//       AddOns: 'Queueing Service',
+//       Remarks: "This is a remark message From User"),
+//   Active(
+//       SenderName: 'Lorenz Pepito',
+//       ReceiverName: 'Pedro Penduko',
+//       SenderNumber: '+639321721859',
+//       ReceiverNumber: '+639396266482',
+//       TransactionID: "123-456789",
+//       Schedule: "07/07/21",
+//       Time: "2:30",
+//       Pickup: "PickUp",
+//       DropOff: "DropOff",
+//       Vehicle: "Vehicle",
+//       Rate: 170.00,
+//       State: true,
+//       ItemType: 'Tshirt',
+//       AddOns: 'Queueing Service',
+//       Remarks: "This is a remark message From User"),
+// ];
 
 final List<Cancelled> sampleCancelledOrder = [
   Cancelled(
@@ -187,25 +185,6 @@ final List<Ongoing> sampleOngoingOrder = [
       Rate: 102.50),
 ];
 
-final List<NotificationModel> sampleNotif = [
-  NotificationModel(
-      title: 'Notification',
-      subtitle: 'Notification Subject',
-      message: 'Notification Message'),
-  NotificationModel(
-      title: 'Notification',
-      subtitle: 'Notification Subject',
-      message: 'Notification Message'),
-  NotificationModel(
-      title: 'Notification',
-      subtitle: 'Notification Subject',
-      message: 'Notification Message'),
-  NotificationModel(
-      title: 'Notification',
-      subtitle: 'Notification Subject',
-      message: 'Notification Message'),
-];
-
 final List<WalletModel> sampleWallet = [
   WalletModel(
     title: 'Cash out',
@@ -237,7 +216,7 @@ final List<WalletModel> sampleWallet = [
 class UserPreferences {
   static const _keyUser = 'user';
   static late SharedPreferences _preferences;
-  static get myUser => User(
+  static get myUser => Users(
         defaultImage: 'assets/user_picture.png',
         userName: 'Rider Juan',
         number: "09329761234",
@@ -247,14 +226,14 @@ class UserPreferences {
     _preferences = await SharedPreferences.getInstance();
   }
 
-  static Future setUser(User user) async {
+  static Future setUser(Users user) async {
     final json = jsonEncode(user.toJson());
 
     await _preferences.setString(_keyUser, json);
   }
 
-  static User getUser() {
+  static Users getUser() {
     final json = _preferences.getString(_keyUser);
-    return json == null ? myUser : User.fromJson(jsonDecode(json));
+    return json == null ? myUser : Users.fromJson(jsonDecode(json));
   }
 }

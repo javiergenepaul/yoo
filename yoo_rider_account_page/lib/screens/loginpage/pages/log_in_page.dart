@@ -5,9 +5,11 @@ import 'package:yoo_rider_account_page/models/rider_login_model.dart';
 import 'package:yoo_rider_account_page/routes/route_generator.dart';
 import 'package:yoo_rider_account_page/screens/landingpage/pages/Landing_page.dart';
 import 'package:yoo_rider_account_page/screens/homepage/pages/home_page.dart';
+import 'package:yoo_rider_account_page/screens/loginpage/widgets/progressindicator.dart';
 import 'package:yoo_rider_account_page/screens/profilepage/pages/rider_account_page.dart';
 import 'package:yoo_rider_account_page/constants/style_theme.dart';
 import 'package:yoo_rider_account_page/services/api_service.dart';
+import 'package:yoo_rider_account_page/services/local_data.dart';
 
 class LogInPage extends StatefulWidget {
   static const String routeName = '/loginpage';
@@ -17,7 +19,10 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPageState extends State<LogInPage> {
+  String? driverToken;
   bool hidePassword = true;
+  bool isApiCallProcess = false;
+  bool login = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
   APIService apiService = new APIService();
@@ -33,15 +38,23 @@ class _LogInPageState extends State<LogInPage> {
   //TODO: add Controllers for Inputs
   //TODO: add Loading Indicator
   late LoginRequestModel requestModel;
-  late LoginResponseModel responseModel;
 
   @override
   void initState() {
-    requestModel = LoginRequestModel(mobileNumber: '', password: '');
+    requestModel = LoginRequestModel(account: '', password: '');
   }
 
   @override
   Widget build(BuildContext context) {
+    return ProgressHUD(
+      child: _uiSetup(context),
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+    );
+  }
+
+  @override
+  Widget _uiSetup(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       body: SingleChildScrollView(
@@ -81,7 +94,7 @@ class _LogInPageState extends State<LogInPage> {
                                   keyboardType: TextInputType.number,
                                   style: TextStyle(color: Colors.white),
                                   onSaved: (input) =>
-                                      requestModel.mobileNumber = input!,
+                                      requestModel.account = input!,
                                   validator: (input) => input!.length <= 10
                                       ? "Should consist of 11 digits"
                                       : null,
@@ -189,38 +202,27 @@ class _LogInPageState extends State<LogInPage> {
                                       color: tertiaryColor,
                                       onPressed: () {
                                         if (validateAndSave()) {
-                                          // setState(() {
-                                          //
-                                          // });
+                                          setState(() {
+                                            isApiCallProcess = true;
+                                          });
                                           apiService
                                               .login(requestModel)
                                               .then((value) {
-                                            // setState(() {
-                                            //   isApiCallProcess = false;
-                                            // });
+                                            setState(() {
+                                              isApiCallProcess = false;
+                                            });
                                             if (value.token.isNotEmpty) {
-                                              final snackbar = SnackBar(
-                                                content: Text(value.message),
-                                              );
-                                              scaffoldKey.currentState!
-                                                  .showSnackBar(snackbar);
                                               RouteGenerator.navigateTo(
                                                   LandingPage.routeName);
                                               print(value.message);
-                                              print(value.token);
-                                              print(value
-                                                  .driver.driverInfo.firstName);
-                                              print(value
-                                                  .driver.driverInfo.lastName);
-                                              print(value
-                                                  .driver.driverInfo.email);
-                                              print(
-                                                  value.driver.driverInfo.city);
-                                              print(value.driver.driverInfo
-                                                  .dateOfBirth);
-                                              print(value.driver.driverInfo
-                                                  .numberOfFans);
+                                              // print(value.token);
+                                              driverToken = value.token;
+                                              print(driverToken);
+                                              print(driverToken);
                                             } else {
+                                              setState(() {
+                                                isApiCallProcess = false;
+                                              });
                                               final snackbar = SnackBar(
                                                 content: Text('User not found'),
                                               );
@@ -229,7 +231,7 @@ class _LogInPageState extends State<LogInPage> {
                                             }
                                           });
                                           print(requestModel.toJson());
-                                          print(requestModel.mobileNumber);
+                                          print(requestModel.account);
                                           print(requestModel.password);
                                         }
                                       },

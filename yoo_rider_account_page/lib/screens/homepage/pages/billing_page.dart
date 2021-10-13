@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:yoo_rider_account_page/constants/style_theme.dart';
+import 'package:yoo_rider_account_page/screens/landingpage/pages/Landing_page.dart';
 
 import 'active_order_page.dart';
 
@@ -12,6 +13,8 @@ class BillingPage extends StatefulWidget {
 }
 
 class _BillingPageState extends State<BillingPage> {
+  bool esignature = false;
+  bool paymentReceived = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,25 +173,124 @@ class _BillingPageState extends State<BillingPage> {
                     SizedBox(
                       height: 15,
                     ),
-                    Container(
-                        height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (context) => ()));
-                          },
-                          child: Text("Get Recipient E-Signature"),
-                          style: ElevatedButton.styleFrom(
-                              primary: primaryColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                        )),
+                    esignature
+                        ? Container(
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Navigator.push(context,
+                                //     MaterialPageRoute(builder: (context) => ()));
+                              },
+                              child: Text("Get Recipient E-Signature"),
+                              style: ElevatedButton.styleFrom(
+                                  primary: primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10))),
+                            ))
+                        : Container(
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: OutlinedButton(
+                              onPressed: () {
+                                showPaymentDialog();
+                                // Navigator.push(context,
+                                //     MaterialPageRoute(builder: (context) => ()));
+                              },
+                              child: !paymentReceived
+                                  ? Text("Payment Received")
+                                  : Text("Delivery Completed"),
+                              style: OutlinedButton.styleFrom(
+                                  primary: primaryColor,
+                                  side: BorderSide(color: primaryColor),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10))),
+                            )),
                   ],
                 ))
           ],
         ),
       ),
     );
+  }
+
+  //Payment Alert Dialog Order
+  void showPaymentDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.check_circle,
+                    size: 100,
+                    color: primaryColor,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  !paymentReceived
+                      ? Text(
+                          'Payment Settled',
+                          style: TextStyle(fontSize: 15),
+                        )
+                      : Text(
+                          'Delivered Successfully',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 40,
+                    width: MediaQuery.of(context).size.width * .3,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(primaryColor),
+                      ),
+                      onPressed: () {
+                        !paymentReceived
+                            ? Navigator.pop(context)
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LandingPage(),
+                                ),
+                              );
+                        ;
+                        setState(() {
+                          paymentReceived = true;
+                        });
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         senderLocation(active, context),
+                        //   ),
+                        // );
+                      },
+                      child: Text(
+                        'Done',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoo_rider_account_page/constants/style_theme.dart';
 import 'package:yoo_rider_account_page/screens/homepage/pages/home_page.dart';
-import 'package:yoo_rider_account_page/screens/notifpage/pages/notifications_page.dart';
 import 'package:yoo_rider_account_page/screens/orderspage/pages/order_page.dart';
 import 'package:yoo_rider_account_page/screens/profilepage/pages/rider_account_page.dart';
 import 'package:yoo_rider_account_page/screens/walletpage/pages/wallet_page.dart';
