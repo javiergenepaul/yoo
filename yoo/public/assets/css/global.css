@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap');
+
+:root {
+    --prim-color: #8C27FF;
+    --sec-color: #23b8cc;
+    --text-color: #8c8884;
+    --text-dark-color: #686868;
+    --font-family-poppins: 'Poppins', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: var(--font-family-poppins);
+}
+
+/*=======================================================
+CUSTOM STYLES
+==================================================*/
+
+.bg--primary {
+    background-color: var(--prim-color);
+}
+
+.bg--secondary {
+    background-color: var(--sec-color);
+}
+
+.prim--color {
+    color: var(--prim-color);
+}
+
+.primary--btn {
+    background: var(--prim-color);
+    color: #fff !important;
+    border-radius: 25px;
+    border: unset;
+    padding: 15px 30px;
+}
+
+.secondary--btn {
+    background: var(--sec-color);
+    color: #fff !important;
+    border-radius: 25px;
+    border: unset;
+    padding: 15px 30px;
+}
+
+/*=======================================================
+MEDIA QUERIES
+==================================================*/
+/* Only EXTRA SMALL */
+@media (min-width: 0px) and (max-width: 575.98px) {
+    .vector {
+        display: none;
+    }
+
+    .login-anchor {
+        flex-direction: column;
+    }
+
+    #header-btn-div {
+        display: none;
+    }
+
+    .header-btns {
+        display: none;
+    }
+}
+
+/* Only SMALL */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .vector {
+        display: none;
+    }
+
+    .login-anchor {
+        flex-direction: column;
+    }
+
+    #header-btn-div {
+        display: none;
+    }
+}
+
+/* Only MEDIUM */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .login-anchor {
+        flex-direction: column;
+    }
+}
+
+/* Only LARGE */
+@media (min-width: 992px) and (max-width: 1199.98px) {}
+
+/* Only XL */
+@media (min-width: 1200px) and (max-width: 1399.98px) {}
+
+/* Only XXL */
+@media (min-width: 1400px) {}
